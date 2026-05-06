@@ -78,7 +78,7 @@ export default function AtlasPage() {
                 style={{ color: 'rgba(222, 219, 200, 0.7)', lineHeight: 1.2 }}
               >
                 Atlas is a small studio working at the seam of cinema, code, and brand.
-                We make sites that behave like films — slow first frames, kept promises,
+                We make sites that behave like films: slow first frames, kept promises,
                 images you don't forget by lunch.
               </motion.p>
 
@@ -117,7 +117,7 @@ export default function AtlasPage() {
                   className: 'italic font-["Instrument_Serif"]',
                 },
                 {
-                  text: 'I cut, I shoot, I write — and lately, I build websites that move like the films I make.',
+                  text: 'I cut, I shoot, I write, and lately, I build websites that move like the films I make.',
                   className: 'font-normal',
                 },
               ]}
@@ -126,7 +126,7 @@ export default function AtlasPage() {
 
           <div className="mt-12 max-w-2xl mx-auto">
             <ScrollRevealText
-              text="Six years of independent work between Paris, Lisbon, and Berlin. A handful of festival selections, a few brand commissions worth telling. Mostly long Mondays — and a stubborn belief that craft still wins."
+              text="Six years of independent work between Paris, Lisbon, and Berlin. A handful of festival selections, a few brand commissions worth telling. Mostly long Mondays, and a stubborn belief that craft still wins."
               className="text-xs sm:text-sm md:text-base"
             />
           </div>
@@ -180,6 +180,7 @@ export default function AtlasPage() {
               <FeatureContent
                 num="01"
                 title="Storyboard Drift."
+                icon="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171918_4a5edc79-d78f-4637-ac8b-53c43c220606.png&w=1280&q=85"
                 items={[
                   'Sketch a film in minutes, not sessions',
                   'Mood references that pull their weight',
@@ -194,6 +195,7 @@ export default function AtlasPage() {
               <FeatureContent
                 num="02"
                 title="Cut Companion."
+                icon="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171741_ed9845ab-f5b2-4018-8ce7-07cc01823522.png&w=1280&q=85"
                 items={[
                   'Frame-level notes from your team in real time',
                   'Color drift, pacing, transitions auto-flagged',
@@ -207,6 +209,7 @@ export default function AtlasPage() {
               <FeatureContent
                 num="03"
                 title="Deep Mode."
+                icon="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171809_f56666dc-c099-4778-ad82-9ad4f209567b.png&w=1280&q=85"
                 items={[
                   'Mute the world for the hours you need',
                   'Soundscapes for focus or for rest',
@@ -235,10 +238,30 @@ function FeatureCard({ children, delay }: { children: React.ReactNode; delay: nu
   );
 }
 
-function FeatureContent({ num, title, items }: { num: string; title: string; items: string[] }) {
+function FeatureContent({
+  num,
+  title,
+  items,
+  icon,
+}: {
+  num: string;
+  title: string;
+  items: string[];
+  icon?: string;
+}) {
   return (
     <div className="bg-[#212121] h-full rounded-xl p-6 flex flex-col">
-      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded bg-white/5 mb-6" />
+      {icon ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={icon}
+          alt=""
+          className="w-10 h-10 sm:w-12 sm:h-12 rounded object-cover mb-6"
+          loading="lazy"
+        />
+      ) : (
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded bg-white/5 mb-6" />
+      )}
       <h3 className="text-base sm:text-lg font-medium mb-4 flex items-center justify-between" style={{ color: '#E1E0CC' }}>
         <span>{title}</span>
         <span className="text-xs text-gray-500">{num}</span>
