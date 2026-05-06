@@ -1,26 +1,228 @@
 @import "tailwindcss";
 
+/* Glowing card — orbital dot + glowing border lines */
+@keyframes moveDot {
+  0%, 100% { top: 10%; right: 10%; }
+  25%      { top: 10%; right: calc(100% - 35px); }
+  50%      { top: calc(100% - 30px); right: calc(100% - 35px); }
+  75%      { top: calc(100% - 30px); right: 10%; }
+}
+
+.glowing-card-outer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #0d0d0d;
+}
+
+.glowing-card-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 2rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.10) 0%, transparent 60%),
+    linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  overflow: hidden;
+}
+
+.glowing-card-ray {
+  position: absolute;
+  top: -40%;
+  left: 50%;
+  width: 60%;
+  height: 80%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center,
+    rgba(255,255,255,0.25) 0%,
+    rgba(255,255,255,0.05) 40%,
+    transparent 70%);
+  filter: blur(22px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glowing-card-dot {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow:
+    0 0 6px 2px rgba(255,255,255,0.85),
+    0 0 18px 6px rgba(255,255,255,0.35);
+  animation: moveDot 6s linear infinite;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.glowing-card-line {
+  position: absolute;
+  pointer-events: none;
+  z-index: 3;
+}
+.glowing-card-line.topl {
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+}
+.glowing-card-line.bottoml {
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+}
+.glowing-card-line.leftl {
+  left: 0;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+}
+.glowing-card-line.rightl {
+  right: 0;
+  top: 10%;
+  bottom: 10%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.55) 50%, transparent 100%);
+}
+
+.glowing-card-label {
+  position: relative;
+  z-index: 2;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+.glowing-card-value {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  line-height: 1;
+}
+
+/* Hide Next.js 16 dev tools / build indicator floating UI */
+nextjs-portal,
+[data-next-mark],
+[data-nextjs-toast],
+[data-nextjs-dev-tools-button],
+button[data-next-badge],
+button[data-nextjs-dev-tools-button] {
+  display: none !important;
+}
+
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0C0C0C;
+  --foreground: #F5F5F5;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-instrument-serif);
+  --animate-marquee: marquee 30s linear infinite;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.font-serif {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+}
+
+/* Liquid Glass utilities — wrapped in @layer to survive Tailwind v4 purge */
+@layer components {
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.05);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.18) 20%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0.18) 80%,
+      rgba(255, 255, 255, 0.55) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .liquid-glass-strong {
+    background: rgba(255, 255, 255, 0.08);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(50px) saturate(160%);
+    -webkit-backdrop-filter: blur(50px) saturate(160%);
+    border: none;
+    box-shadow:
+      4px 4px 4px rgba(0, 0, 0, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.18);
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .liquid-glass-strong::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.65) 0%,
+      rgba(255, 255, 255, 0.25) 20%,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0) 60%,
+      rgba(255, 255, 255, 0.25) 80%,
+      rgba(255, 255, 255, 0.65) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 1;
+  }
 }
