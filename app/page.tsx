@@ -24,7 +24,7 @@ const TEMPLATES: Template[] = [
     tagline: 'Architecte résidentiel · scroll-driven blueprint + parallax projets',
     client: 'Cabinet d’architecture, Cluses (HS)',
     stack: ['Next 16', 'GSAP ScrollTrigger', 'Framer Motion', 'SVG draw-on'],
-    accent: '#141414',
+    accent: '#F5F5F5',
     number: '05',
   },
   {
@@ -69,16 +69,32 @@ export default function PortfolioIndex() {
   return (
     <main className="min-h-screen bg-[#0C0C0C] text-[#F5F5F5] antialiased">
       <div className="max-w-[1400px] mx-auto px-6 sm:px-10 md:px-14 lg:px-20">
-        {/* Header */}
-        <header className="pt-12 md:pt-16 pb-20 md:pb-32 flex items-baseline justify-between gap-8">
-          <div>
-            <span className="block text-[11px] font-medium tracking-[0.22em] uppercase text-white/45 mb-3">
-              Cinematic Lab
+        {/* Header — minimal logomark + name */}
+        <header className="pt-12 md:pt-16 pb-20 md:pb-32 flex items-center justify-between gap-8">
+          <a href="/" className="group inline-flex items-center gap-3" aria-label="Antoine — Studio">
+            {/* Logomark : geometric "A·S" mark, clean and editorial */}
+            <svg
+              width="34"
+              height="34"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden
+              className="transition-transform duration-500 group-hover:rotate-180"
+            >
+              {/* outer ring */}
+              <circle cx="20" cy="20" r="19" stroke="#F5F5F5" strokeWidth="1.2" />
+              {/* slash separator */}
+              <line x1="6" y1="34" x2="34" y2="6" stroke="#F5F5F5" strokeWidth="1.2" strokeLinecap="round" />
+              {/* tiny stroke accents */}
+              <circle cx="20" cy="20" r="1.6" fill="#F5F5F5" />
+            </svg>
+
+            <span className="font-serif italic text-[22px] md:text-[24px] tracking-[-0.02em] leading-none text-white">
+              antoine<span className="text-white/40">.</span>scie
             </span>
-            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl tracking-[-0.04em] leading-[0.95]">
-              Antoine.
-            </h1>
-          </div>
+          </a>
+
           <div className="hidden md:flex flex-col items-end gap-1 text-[11px] font-medium tracking-[0.18em] uppercase text-white/45">
             <span>2026</span>
             <span>{TEMPLATES.length} sites</span>
@@ -175,18 +191,27 @@ export default function PortfolioIndex() {
             <p className="font-serif italic text-xl md:text-2xl tracking-[-0.02em] leading-[1.3] text-white max-w-[560px]">
               Vous voulez un site qui claque autant que votre produit ?
             </p>
-            <a
-              href="mailto:ant.scie@gmail.com"
-              className="inline-flex items-center gap-3 mt-8 text-[12px] font-medium tracking-[0.18em] uppercase text-white border-b border-white/40 pb-1 hover:border-white transition-colors"
-            >
-              ant.scie@gmail.com
-              <span aria-hidden>→</span>
-            </a>
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-3 mt-8">
+              <a
+                href="mailto:antoine.scie@gmail.com"
+                className="inline-flex items-center gap-3 text-[12px] font-medium tracking-[0.18em] uppercase text-white border-b border-white/40 pb-1 hover:border-white transition-colors"
+              >
+                antoine.scie@gmail.com
+                <span aria-hidden>→</span>
+              </a>
+              <a
+                href="tel:+33681949021"
+                className="inline-flex items-center gap-3 text-[12px] font-medium tracking-[0.18em] uppercase text-white border-b border-white/40 pb-1 hover:border-white transition-colors"
+              >
+                +33 6 81 94 90 21
+                <span aria-hidden>→</span>
+              </a>
+            </div>
           </div>
-          <div className="md:col-span-4 md:col-start-9 flex flex-col gap-2 text-[11px] tracking-[0.18em] uppercase text-white/35">
-            <span>Antoine · Cinematic Lab</span>
-            <span>Genève · Cluses · à distance</span>
-            <span>© 2026 · tous droits réservés</span>
+          <div className="md:col-span-4 md:col-start-9 flex md:justify-end items-end">
+            <span className="text-[11px] tracking-[0.18em] uppercase text-white/35">
+              © 2026 · tous droits réservés
+            </span>
           </div>
         </footer>
       </div>
