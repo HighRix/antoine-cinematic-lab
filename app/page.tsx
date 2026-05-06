@@ -91,7 +91,7 @@ export default function PortfolioIndex() {
             </svg>
 
             <span className="font-serif italic text-[22px] md:text-[24px] tracking-[-0.02em] leading-none text-white">
-              antoine<span className="text-white/40">.</span>scie
+              cinematic<span className="text-white/40">.</span>lab
             </span>
           </a>
 
@@ -110,7 +110,7 @@ export default function PortfolioIndex() {
           </div>
           <div className="md:col-span-4 md:col-start-9 flex items-end">
             <p className="text-white/55 text-sm md:text-base leading-relaxed max-w-[320px]">
-              Six templates produits en 2026 pour explorer ce que peut faire le web premium quand on traite chaque scroll comme un plan séquence.
+              Une exploration continue de ce que peut faire le web premium quand chaque scroll devient un plan séquence.
             </p>
           </div>
         </section>
