@@ -99,7 +99,7 @@ function Hero() {
           </Glass>
         </motion.div>
 
-        <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-heading italic leading-[0.8] max-w-3xl mb-8 text-center" style={{ letterSpacing: '-4px' }}>
+        <h1 className="text-6xl md:text-7xl lg:text-[5.5rem] font-heading italic leading-[1.05] max-w-3xl mb-8 text-center" style={{ letterSpacing: '-4px' }}>
           <BlurText text="Websites that get cited by ChatGPT" delay={100} className="justify-center w-full" />
         </h1>
 
@@ -109,8 +109,7 @@ function Hero() {
           transition={{ duration: 0.6, delay: 0.8 }}
           className="text-sm md:text-base text-white font-body font-light leading-tight max-w-xl mb-10"
         >
-          Cinematic design meets GEO foundations. Sites built for humans —
-          and for the AI engines that recommend you to them.
+          Cinematic design meets GEO foundations. Sites built for humans, and for the AI engines that recommend you to them.
         </motion.p>
 
         <motion.div
@@ -204,8 +203,7 @@ function StartSection() {
         <BlurText text="From brief to live in seven days." delay={120} className="justify-center w-full" />
       </h2>
       <p className="text-white/60 font-body font-light text-sm md:text-base text-center max-w-xl mb-8">
-        You bring the brief. I bring the system — cinematic patterns,
-        GEO foundations, async delivery. No meetings marathons. No scope creep.
+        You bring the brief. I bring the system: cinematic patterns, GEO foundations, async delivery. No meetings marathons. No scope creep.
       </p>
       <GlassButton className="rounded-full px-6 py-3 text-sm font-medium" strong>
         Get Started
@@ -230,7 +228,7 @@ function FeaturesChess() {
 
         <ChessRow
           title="Designed to be remembered."
-          body="Most landing pages forget themselves the moment you scroll away. Cinematic motion gives your brand a fingerprint — the kind that founders and AI engines both repeat back."
+          body="Most landing pages forget themselves the moment you scroll away. Cinematic motion gives your brand a fingerprint, the kind that founders and AI engines both repeat back."
           buttonText="See the work"
           gif="/gifs/feature-finlytic.gif"
           reverse={false}
@@ -412,7 +410,7 @@ function CtaFooter() {
       </div>
 
       <div className="mt-32 pt-8 border-t border-white/10 w-full max-w-7xl flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="text-white/40 text-xs">© 2026 Antoine SCIE — All rights reserved.</div>
+        <div className="text-white/40 text-xs">© 2026 Antoine SCIE. All rights reserved.</div>
         <div className="flex gap-6 text-white/40 text-xs">
           <a href="#" className="hover:text-white transition">Privacy</a>
           <a href="#" className="hover:text-white transition">Terms</a>

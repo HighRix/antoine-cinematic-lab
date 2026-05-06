@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Antoine — Cinematic Web Design',
+  title: 'Antoine · Cinematic Web Design',
   description:
     'Sites cinematic premium animés au scroll, conçus pour founders et agences qui veulent un site qui claque autant que leur produit.',
 };
@@ -25,7 +25,7 @@ const TEMPLATES: Template[] = [
     client: 'Cabinet d’architecture, Cluses (HS)',
     stack: ['Next 16', 'GSAP ScrollTrigger', 'Framer Motion', 'SVG draw-on'],
     accent: '#141414',
-    number: '06',
+    number: '05',
   },
   {
     slug: '/orbis',
@@ -34,7 +34,7 @@ const TEMPLATES: Template[] = [
     client: 'Concept NFT collection',
     stack: ['Next 16', 'CSS liquid glass', 'Framer Motion', 'Lucide'],
     accent: '#6FFF00',
-    number: '05',
+    number: '04',
   },
   {
     slug: '/jack',
@@ -43,15 +43,6 @@ const TEMPLATES: Template[] = [
     client: 'Template 3D artist',
     stack: ['Next 16', 'Framer Motion useScroll', 'Magnet hover', 'Kanit'],
     accent: '#BBCCD7',
-    number: '04',
-  },
-  {
-    slug: '/aurum',
-    name: 'Aurum Capital',
-    tagline: 'VC fund · hero vidéo full-bleed + dark glass nav',
-    client: 'Fonds d’investissement',
-    stack: ['Next 16', 'Inter', 'Dark glass', 'Higgsfield video'],
-    accent: '#D4B896',
     number: '03',
   },
   {
@@ -195,7 +186,7 @@ export default function PortfolioIndex() {
           <div className="md:col-span-4 md:col-start-9 flex flex-col gap-2 text-[11px] tracking-[0.18em] uppercase text-white/35">
             <span>Antoine · Cinematic Lab</span>
             <span>Genève · Cluses · à distance</span>
-            <span>© 2026 — tous droits réservés</span>
+            <span>© 2026 · tous droits réservés</span>
           </div>
         </footer>
       </div>
