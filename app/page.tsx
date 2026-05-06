@@ -56,7 +56,7 @@ const TEMPLATES: Template[] = [
   },
   {
     slug: '/atlas',
-    name: 'Prisma Studio',
+    name: 'Atlas Studio',
     tagline: 'Studio créatif · WordsPullUp + animated letter reveal',
     client: 'Studio design',
     stack: ['Next 16', 'Framer Motion', 'WordsPullUp custom', 'Instrument Serif'],
