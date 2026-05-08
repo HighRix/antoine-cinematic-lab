@@ -19,13 +19,13 @@ export function PrintBar() {
       }}
     >
       <span style={{ color: 'rgba(245,245,245,0.55)' }}>
-        Astuce — pour générer le PDF :{' '}
-        <strong style={{ color: '#E8C677' }}>⌘P</strong> puis <em>Enregistrer au format PDF</em>.
+        Astuce. Pour générer le PDF :{' '}
+        <strong style={{ color: '#E8721A' }}>⌘P</strong> puis <em>Enregistrer au format PDF</em>.
       </span>
       <button
         onClick={() => window.print()}
         style={{
-          background: '#E8C677',
+          background: '#E8721A',
           color: '#0A0A0A',
           padding: '8px 16px',
           borderRadius: 6,
