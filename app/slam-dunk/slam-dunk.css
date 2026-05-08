@@ -1,0 +1,98 @@
+/* Slam Dunk — scoped styles
+   Inspired by the Vite original (Tailwind CDN config + extra utilities) */
+
+.slam-dunk-scope {
+  --slam-bg: #FF5500;
+}
+
+/* The .slam-dunk-root is h-screen + overflow-hidden so it pins the viewport without touching body overflow.
+   Body must remain scrollable for parent Lenis to function on other routes — but on /slam-dunk
+   the page is fixed-height and the inner HeroUI scroll uses [data-lenis-prevent] so wheel events
+   bypass the root Lenis instance. */
+
+/* Text outline (DEFY title in section 6) */
+.slam-dunk-scope .text-outline {
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+  color: transparent;
+}
+
+/* Hide scrollbar inside HeroUI scroll container */
+.slam-dunk-scope .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.slam-dunk-scope .no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Smooth fade in (used by IntersectionObserver in HeroUI) */
+.slam-dunk-scope .fade-in {
+  animation: slamFadeIn 1s ease-out forwards;
+  opacity: 0;
+}
+@keyframes slamFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Custom cursor mode hides default cursor everywhere inside the slam-dunk page */
+.slam-dunk-scope,
+.slam-dunk-scope * {
+  cursor: none;
+}
+
+/* Inter font fallback for body text inside Slam Dunk
+   The next/font Anton variable is applied via the layout */
+.slam-dunk-scope {
+  font-family: var(--font-inter-slam), 'Inter', system-ui, sans-serif;
+}
+
+/* Animate-in helpers used by Configurator + CartSidebar */
+.slam-dunk-scope .animate-in {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+.slam-dunk-scope .fade-in {
+  animation-name: slamFadeIn;
+}
+.slam-dunk-scope .slide-in-from-right-4 {
+  animation-name: slamSlideInRight;
+}
+.slam-dunk-scope .slide-in-from-bottom-2 {
+  animation-name: slamSlideInBottom;
+}
+@keyframes slamSlideInRight {
+  from {
+    transform: translateX(1rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slamSlideInBottom {
+  from {
+    transform: translateY(0.5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.slam-dunk-scope .duration-500 {
+  animation-duration: 0.5s;
+}
+
+/* Reduced motion — kill all custom animations */
+@media (prefers-reduced-motion: reduce) {
+  .slam-dunk-scope .animate-in,
+  .slam-dunk-scope .fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

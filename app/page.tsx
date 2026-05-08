@@ -28,6 +28,15 @@ const TEMPLATES: Template[] = [
     number: '05',
   },
   {
+    slug: '/slam-dunk',
+    name: 'Slam Dunk Store',
+    tagline: 'E-commerce premium · ballon 3D photoréaliste + scroll narratif 6 actes',
+    client: 'Concept e-commerce sport haut de gamme',
+    stack: ['Next 16', 'Three.js + R3F', 'GSAP', 'Audio procédural'],
+    accent: '#FF5500',
+    number: '06',
+  },
+  {
     slug: '/orbis',
     name: 'Orbis.NFT',
     tagline: 'Landing NFT space · liquid glass + vidéos CloudFront',
