@@ -5,7 +5,7 @@ export function FounderSection() {
   return (
     <section
       id="cabinet"
-      className="relative overflow-hidden pt-24 md:pt-32 pb-16 md:pb-24"
+      className="relative overflow-hidden pt-20 md:pt-32 pb-20 md:pb-24"
       style={{ background: '#0A0A0A' }}
     >
       <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-12 relative">
@@ -157,7 +157,7 @@ export function FounderSection() {
             className="italic leading-none whitespace-nowrap"
             style={{
               fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: 'clamp(10rem, 28vw, 32rem)',
+              fontSize: 'clamp(6.5rem, 28vw, 32rem)',
               letterSpacing: '-0.04em',
               color: 'rgba(255, 255, 255, 0.04)',
             }}

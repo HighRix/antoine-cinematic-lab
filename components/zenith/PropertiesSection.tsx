@@ -16,7 +16,7 @@ export function PropertiesSection() {
   return (
     <section className="bg-[#F8F8F8]">
       {/* Intro header : denser layout: eyebrow label + title + subtext + meta row */}
-      <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-12 pt-16 md:pt-20 pb-10 md:pb-14">
+      <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-12 pt-14 md:pt-20 pb-8 md:pb-14">
         {/* Eyebrow row */}
         <div className="flex items-center gap-3 mb-8 md:mb-10">
           <span className="block h-px w-10 bg-[#141414]/30" />
