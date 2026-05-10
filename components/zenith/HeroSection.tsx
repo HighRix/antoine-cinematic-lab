@@ -62,19 +62,15 @@ export function HeroSection() {
               </motion.div>
             </div>
 
-            {/* RIGHT : subtext */}
+            {/* RIGHT : subtext — desktop only. Mobile keeps the hero pure
+                (headline + CTA) so the modern villa video is the focal point. */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="md:col-span-4 md:col-start-9"
+              className="hidden md:block md:col-span-4 md:col-start-9"
             >
-              {/* Mobile : short, high-contrast */}
-              <p className="md:hidden text-[#141414] text-[15.5px] leading-[1.5] max-w-[34ch] font-normal">
-                Villas sur mesure en Haute-Savoie. Vingt années à dessiner des maisons taillées pour leur site et ceux qui les habitent.
-              </p>
-              {/* Desktop : full version unchanged */}
-              <p className="hidden md:block text-[#141414]/80 text-[17px] leading-[1.45]">
+              <p className="text-[#141414]/80 text-[17px] leading-[1.45]">
                 Concevoir des villas sur mesure et des projets immobiliers où l&apos;architecture, l&apos;usage et la lumière trouvent leur équilibre. 20 ans d&apos;expertise au service de votre habitat.
               </p>
             </motion.div>
