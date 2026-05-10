@@ -19,6 +19,15 @@ type Template = {
 
 const TEMPLATES: Template[] = [
   {
+    slug: '/grenier-bio',
+    name: 'Le Grenier Bio d’Emberbail',
+    tagline: 'Ferme bio · hero vidéo doré + scène 3D produits + scroll cinematic terroir',
+    client: 'Ferme bio, Nailloux (31)',
+    stack: ['Next 16', 'GSAP + Lenis smooth scroll', 'Three.js + R3F', 'Schema LocalBusiness'],
+    accent: '#0E7824',
+    number: '07',
+  },
+  {
     slug: '/zenith',
     name: 'FT Design',
     tagline: 'Architecte résidentiel · scroll-driven blueprint + parallax projets',

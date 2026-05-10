@@ -1,0 +1,134 @@
+/* ====================================================================
+   GRENIER BIO — Design tokens + utilities scoped to .grenier-bio-root
+   Loaded only by app/grenier-bio/layout.tsx, so it doesn't pollute
+   the rest of the portfolio (zenith, atlas, etc.).
+   ==================================================================== */
+
+@theme {
+  /* --- Palette terroir (couleurs spécifiques grenier-bio, prefixées
+     pour éviter toute collision avec un futur design system du portfolio) --- */
+  --color-grenier-vert-prairie: #0E7824;
+  --color-grenier-vert-prairie-light: #1a9c34;
+  --color-grenier-vert-prairie-dark: #0a5a1c;
+  --color-grenier-anthracite: #2D2D2F;
+  --color-grenier-anthracite-soft: #4a4a4d;
+  --color-grenier-creme: #FAF7F0;
+  --color-grenier-creme-warm: #F2EBD9;
+  --color-grenier-dore-ble: #D4A574;
+  --color-grenier-dore-ble-light: #E8C49A;
+  --color-grenier-sable: #C9B68B;
+  --color-grenier-terre: #5C3A2E;
+}
+
+/* CSS variables also accessible via plain --color-* names within the scoped wrapper.
+   This way the existing Tailwind classes (e.g. bg-[#0E7824]) still work because they
+   reference hex values directly. */
+.grenier-bio-root {
+  --color-vert-prairie: #0E7824;
+  --color-vert-prairie-light: #1a9c34;
+  --color-vert-prairie-dark: #0a5a1c;
+  --color-anthracite: #2D2D2F;
+  --color-anthracite-soft: #4a4a4d;
+  --color-creme: #FAF7F0;
+  --color-creme-warm: #F2EBD9;
+  --color-dore-ble: #D4A574;
+  --color-dore-ble-light: #E8C49A;
+  --color-sable: #C9B68B;
+  --color-terre: #5C3A2E;
+
+  --font-recoleta: 'Recoleta Regular', 'Instrument Serif', Georgia, serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --space-section: clamp(5rem, 10vw, 9rem);
+  --space-gutter: clamp(1rem, 1.5vw, 1.75rem);
+
+  background: var(--color-creme);
+  color: var(--color-anthracite);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.grenier-bio-root ::selection {
+  background: var(--color-vert-prairie);
+  color: var(--color-creme);
+}
+
+/* --- Recoleta utility, scoped to grenier-bio --- */
+.grenier-bio-root .font-recoleta {
+  font-family: var(--font-recoleta);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* --- Hide scrollbars (scoped) --- */
+.grenier-bio-root .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.grenier-bio-root .no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* --- Gradient borders helper --- */
+.grenier-bio-root .border-warm {
+  border: 1px solid color-mix(in srgb, var(--color-anthracite) 12%, transparent);
+}
+
+/* --- Reveal animation (used by IntersectionObserver) --- */
+.grenier-bio-root .reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1s var(--ease-out), transform 1s var(--ease-out);
+}
+.grenier-bio-root .reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Underline grow on hover (links) --- */
+.grenier-bio-root .link-underline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.grenier-bio-root .link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+.grenier-bio-root .link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* --- Subtle paper grain on creme backgrounds --- */
+.grenier-bio-root .bg-paper {
+  background-color: var(--color-creme);
+  background-image:
+    radial-gradient(circle at 25% 35%, rgba(212, 165, 116, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 75% 65%, rgba(14, 120, 36, 0.03) 0%, transparent 50%);
+}
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .grenier-bio-root *,
+  .grenier-bio-root *::before,
+  .grenier-bio-root *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .grenier-bio-root .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
