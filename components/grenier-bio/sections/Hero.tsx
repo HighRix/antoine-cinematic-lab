@@ -38,14 +38,15 @@ export function Hero() {
       id="hero"
       className="relative w-full min-h-screen overflow-hidden flex flex-col"
     >
-      {/* Background video — wheat field golden hour */}
+      {/* Background video — wheat field golden hour. Mobile re-centre vers
+          la prairie (plus dense, plus saturée) et évite le ciel délavé. */}
       <video
         autoPlay
         muted
         loop
         playsInline
         preload="auto"
-        className="absolute inset-0 w-full h-full object-cover bg-[#FAF7F0]"
+        className="absolute inset-0 w-full h-full object-cover bg-[#FAF7F0] [object-position:50%_65%] sm:[object-position:50%_50%]"
         aria-hidden="true"
       >
         <source
@@ -54,17 +55,26 @@ export function Hero() {
         />
       </video>
 
-      {/* Soft cream gradient overlay — preserves video but ensures legibility */}
+      {/* Soft cream gradient overlay — desktop : équilibré haut/bas.
+          Mobile : haut plus marqué pour fondre la zone supérieure claire
+          dans le bg crème du site, et donner du contraste au tag/titre. */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none sm:hidden"
+        style={{
+          background:
+            'linear-gradient(180deg, rgba(250,247,240,0.85) 0%, rgba(250,247,240,0.55) 18%, rgba(250,247,240,0.15) 38%, rgba(250,247,240,0.05) 60%, rgba(250,247,240,0.4) 100%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 pointer-events-none hidden sm:block"
         style={{
           background:
             'linear-gradient(180deg, rgba(250,247,240,0.35) 0%, rgba(250,247,240,0.05) 30%, rgba(250,247,240,0.05) 70%, rgba(250,247,240,0.6) 100%)',
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center max-w-[1600px] mx-auto w-full px-5 sm:px-6 md:px-12 lg:px-16 pt-24 sm:pt-32 md:pt-40 pb-20 sm:pb-24 md:pb-32">
+      {/* Content : mobile commence haut (justify-start), desktop centré. */}
+      <div className="relative z-10 flex-1 flex flex-col justify-start sm:justify-center max-w-[1600px] mx-auto w-full px-5 sm:px-6 md:px-12 lg:px-16 pt-16 sm:pt-32 md:pt-40 pb-12 sm:pb-24 md:pb-32">
         {/* Tag */}
         <div className="hero-tag inline-flex items-center gap-3 mb-6 sm:mb-8 md:mb-10">
           <span className="w-6 sm:w-8 h-px bg-[#0E7824]" />
