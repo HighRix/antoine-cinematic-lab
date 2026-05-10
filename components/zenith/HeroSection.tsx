@@ -7,14 +7,25 @@ const HERO_VIDEO =
 
 export function HeroSection() {
   return (
-    <section className="relative h-[100svh] md:h-screen w-full overflow-hidden">
+    <section className="relative h-[100svh] md:h-screen w-full overflow-hidden bg-[#F8F8F8]">
       <video
         src={HERO_VIDEO}
         autoPlay
         muted
         loop
         playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        preload="auto"
+        className="absolute top-0 left-0 w-full h-full object-cover z-0 [object-position:50%_70%] md:[object-position:50%_50%]"
+      />
+
+      {/* Mobile-only top fade : softens the washed-out sky and lifts the headline contrast */}
+      <div
+        aria-hidden
+        className="md:hidden absolute inset-x-0 top-0 z-[1] h-[60%] pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(to bottom, rgba(248, 248, 248, 0.92) 0%, rgba(248, 248, 248, 0.55) 35%, rgba(248, 248, 248, 0.18) 65%, transparent 100%)',
+        }}
       />
 
       <div className="relative z-10 h-full">

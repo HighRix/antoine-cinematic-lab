@@ -129,9 +129,11 @@ export const ModemAnimatedFooter = ({
           </div>
         </div>
 
-        {/* GIANT semi-visible brand text: the focal effect */}
+        {/* GIANT semi-visible brand text: the focal effect — desktop only.
+            Mobile hides it: the small footer height + crowded nav links made
+            the watermark overlap and damage readability. */}
         <div
-          className="leading-none absolute left-1/2 -translate-x-1/2 bottom-28 md:bottom-24 font-extrabold tracking-tighter pointer-events-none select-none text-center px-4 bg-clip-text text-transparent uppercase"
+          className="hidden md:block leading-none absolute left-1/2 -translate-x-1/2 bottom-28 md:bottom-24 font-extrabold tracking-tighter pointer-events-none select-none text-center px-4 bg-clip-text text-transparent uppercase"
           style={{
             fontSize: 'clamp(2.25rem, 10vw, 7rem)',
             maxWidth: '95vw',
