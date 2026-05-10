@@ -586,6 +586,72 @@ export function ProcessSectionBlueprint() {
           3.6,
         );
       });
+
+      // Mobile : non-pinned scroll-driven reveal — villa is drawn while the
+      // section traverses the viewport. No scroll-jacking.
+      mm.add('(max-width: 767px)', () => {
+        const root = container.current;
+        if (!root) return;
+
+        const mobileSvg = root.querySelector<HTMLElement>('.blueprint-mobile-svg');
+        if (!mobileSvg) return;
+
+        const paths = mobileSvg.querySelectorAll<SVGGeometryElement>('[data-draw]');
+        paths.forEach((p) => {
+          const len = p.getTotalLength();
+          gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
+        });
+        gsap.set(mobileSvg.querySelectorAll('[data-fade]'), {
+          opacity: 0,
+          scale: 0.95,
+          transformOrigin: '50% 50%',
+        });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: mobileSvg,
+            start: 'top 85%',
+            end: 'bottom 35%',
+            scrub: 1,
+          },
+        });
+
+        tl.to(
+          mobileSvg.querySelectorAll('[data-step="1"][data-draw]'),
+          { strokeDashoffset: 0, ease: 'none', duration: 1, stagger: 0.04 },
+          0,
+        ).to(
+          mobileSvg.querySelectorAll('[data-step="1"][data-fade]'),
+          { opacity: 1, scale: 1, ease: 'power2.out', duration: 0.4 },
+          0.5,
+        );
+
+        tl.to(
+          mobileSvg.querySelectorAll('[data-step="2"][data-draw]'),
+          { strokeDashoffset: 0, ease: 'none', duration: 1, stagger: 0.06 },
+          1,
+        );
+
+        tl.to(
+          mobileSvg.querySelectorAll('[data-step="3"][data-draw]'),
+          { strokeDashoffset: 0, ease: 'none', duration: 1, stagger: 0.03 },
+          2,
+        ).to(
+          mobileSvg.querySelectorAll('[data-step="3"][data-fade]'),
+          { opacity: 1, scale: 1, ease: 'power2.out', duration: 0.5, stagger: 0.05 },
+          2.5,
+        );
+
+        tl.to(
+          mobileSvg.querySelectorAll('[data-step="4"][data-draw]'),
+          { strokeDashoffset: 0, ease: 'none', duration: 1, stagger: 0.025 },
+          3,
+        ).to(
+          mobileSvg.querySelectorAll('[data-step="4"][data-fade]'),
+          { opacity: 1, scale: 1, ease: 'back.out(1.6)', duration: 0.5 },
+          3.6,
+        );
+      });
     },
     { scope: container },
   );
@@ -717,7 +783,7 @@ export function ProcessSectionBlueprint() {
       </div>
 
       {/* ============================================================ */}
-      {/* MOBILE — stacked, no pinning, static villa illustration */}
+      {/* MOBILE — non-pinned scroll-driven reveal */}
       {/* ============================================================ */}
       <div className="md:hidden px-5 pt-14 pb-14">
         {/* Header */}
@@ -737,9 +803,9 @@ export function ProcessSectionBlueprint() {
           un projet construit.
         </h2>
 
-        {/* Static villa — full final illustration */}
+        {/* Animated villa — drawn progressively while the section traverses the viewport */}
         <div
-          className="relative w-full mb-10 rounded-[2px]"
+          className="blueprint-mobile-svg relative w-full mb-10 rounded-[2px]"
           style={{
             aspectRatio: '1200 / 700',
             background:
@@ -748,7 +814,7 @@ export function ProcessSectionBlueprint() {
           }}
         >
           <ModernVillaSVG
-            variant="static"
+            variant="animated"
             className="absolute inset-0 w-full h-full"
           />
         </div>
