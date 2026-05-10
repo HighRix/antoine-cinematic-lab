@@ -69,7 +69,12 @@ export function HeroSection() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="md:col-span-4 md:col-start-9"
             >
-              <p className="text-[#141414]/80 text-[14.5px] md:text-[17px] leading-[1.5] md:leading-[1.45] max-w-[36ch] md:max-w-none">
+              {/* Mobile : short, high-contrast */}
+              <p className="md:hidden text-[#141414] text-[15.5px] leading-[1.5] max-w-[34ch] font-normal">
+                Villas sur mesure en Haute-Savoie. Vingt années à dessiner des maisons taillées pour leur site et ceux qui les habitent.
+              </p>
+              {/* Desktop : full version unchanged */}
+              <p className="hidden md:block text-[#141414]/80 text-[17px] leading-[1.45]">
                 Concevoir des villas sur mesure et des projets immobiliers où l&apos;architecture, l&apos;usage et la lumière trouvent leur équilibre. 20 ans d&apos;expertise au service de votre habitat.
               </p>
             </motion.div>
