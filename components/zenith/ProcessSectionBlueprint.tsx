@@ -136,30 +136,6 @@ function ModernVillaSVG({
         0,00
       </text>
 
-      {/* Solar reference disc upper-left (modernist orientation marker) */}
-      <circle
-        {...stepAttr('1')}
-        {...draw}
-        cx="170"
-        cy="140"
-        r="38"
-        strokeOpacity="0.35"
-      />
-      <text
-        {...stepAttr('1')}
-        {...fade}
-        x="170"
-        y="200"
-        textAnchor="middle"
-        fontSize="9"
-        fill="#141414"
-        stroke="none"
-        letterSpacing="0.18em"
-        opacity={variant === 'animated' ? undefined : 0.45}
-      >
-        SUD
-      </text>
-
       {/* === STEP 2 — Volumes (cantilevered modernist box) === */}
       {/* Ground floor — closed volume A */}
       <path
