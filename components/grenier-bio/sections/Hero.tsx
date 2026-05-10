@@ -44,8 +44,8 @@ export function Hero() {
         muted
         loop
         playsInline
-        poster="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2400&q=80&auto=format&fit=crop"
-        className="absolute inset-0 w-full h-full object-cover"
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover bg-[#FAF7F0]"
         aria-hidden="true"
       >
         <source
