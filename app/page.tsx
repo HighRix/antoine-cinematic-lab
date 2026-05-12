@@ -4,7 +4,7 @@ import { FooterWatermark } from '@/components/cinematic/FooterWatermark';
 import { Logo } from '@/components/cinematic/Logo';
 
 export const metadata: Metadata = {
-  title: 'Antoine · Cinematic Web Design',
+  title: 'cinematic.lab — portfolio',
   description:
     "Sites cinematic premium animés au scroll, conçus pour founders et agences qui veulent un site qui claque autant que leur produit.",
 };
