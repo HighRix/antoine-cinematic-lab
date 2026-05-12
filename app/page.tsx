@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ProjectCard, type Project } from '@/components/cinematic/ProjectCard';
+import { FooterWatermark } from '@/components/cinematic/FooterWatermark';
 
 export const metadata: Metadata = {
   title: 'Antoine · Cinematic Web Design',
@@ -156,12 +157,13 @@ function PortfolioFooter() {
         {/* Left card — video */}
         <div className="relative overflow-hidden rounded-[28px] bg-[#141414] min-h-[360px] lg:min-h-[440px] p-7 md:p-8 flex flex-col justify-between shadow-[0_18px_50px_rgba(242,125,38,0.18)] ring-1 ring-white/8">
           <video
-            src="/portfolio-previews/microvisuals.webm"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_080021_d598092b-c4c2-4e53-8e46-94cf9064cd50.mp4"
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
+            crossOrigin="anonymous"
             className="absolute inset-0 w-full h-full object-cover opacity-95 pointer-events-none"
             aria-hidden
           />
@@ -187,7 +189,7 @@ function PortfolioFooter() {
               Un site qui claque autant que votre produit.
             </p>
             <p className="mt-4 text-[13px] text-white/65 leading-relaxed max-w-[300px]">
-              Livré en 3 à 5 semaines. Disponible jusqu'à fin juin 2026.
+              Livré en 2 semaines. Devis offert, premier appel sous 24h.
             </p>
           </div>
 
@@ -232,7 +234,7 @@ function PortfolioFooter() {
 
         {/* Right card — content */}
         <div className="relative bg-[#141414] rounded-[28px] p-8 md:p-10 ring-1 ring-white/8 overflow-visible">
-          {/* Floating orange badge — replaces Kresna's "Feeling lucky?" cube */}
+          {/* Floating orange badge — code-bracket mark + "on tourne" handwritten tag */}
           <div
             aria-hidden
             className="hidden md:flex absolute -top-7 right-8 lg:right-10 z-10 flex-col items-end gap-1"
@@ -242,12 +244,20 @@ function PortfolioFooter() {
                    background: 'linear-gradient(135deg, #F9B27D 0%, #F27D26 55%, #C7501B 100%)',
                    boxShadow: 'inset 3px 3px 8px rgba(255,255,255,0.35), inset -3px -3px 12px rgba(0,0,0,0.18), 8px 14px 28px rgba(242,125,38,0.35)'
                  }}>
-              <span
-                className="font-serif italic text-[40px] leading-none text-white"
-                style={{ transform: 'rotate(8deg)', letterSpacing: '-0.02em', textShadow: '0 3px 6px rgba(0,0,0,0.25)' }}
+              <svg
+                viewBox="0 0 24 24"
+                width="42"
+                height="42"
+                fill="none"
+                stroke="#0c0c0c"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                style={{ transform: 'rotate(8deg)' }}
               >
-                ·
-              </span>
+                <path d="m9 8-5 4 5 4" />
+                <path d="m15 8 5 4-5 4" />
+              </svg>
             </div>
             <span className="font-serif italic text-[18px] text-white/45 -rotate-[6deg] mt-1">on tourne</span>
           </div>
@@ -274,17 +284,8 @@ function PortfolioFooter() {
             </div>
           </div>
 
-          {/* Bottom — copyright + CTA */}
-          <div className="mt-12 md:mt-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
-            <div>
-              <p className="text-[13px] text-white/55 leading-[1.45] max-w-[280px]">
-                Le calendrier 2026 tient encore deux projets.
-              </p>
-              <p className="mt-1 font-serif italic text-[20px] text-white tracking-[-0.01em]">
-                Prenez votre place.
-              </p>
-            </div>
-
+          {/* Bottom — CTA */}
+          <div className="mt-12 md:mt-14 flex justify-end">
             <a
               href="mailto:antoine.scie@gmail.com?subject=Demande%20de%20devis%20cinematic-lab"
               className="inline-flex items-center gap-3 bg-[#F27D26] hover:bg-[#FF8A2E] text-black font-medium text-[14px] tracking-tight px-5 py-3 rounded-full shadow-[0_8px_24px_rgba(242,125,38,0.35)] hover:shadow-[0_12px_32px_rgba(242,125,38,0.5)] transition-all hover:scale-[1.02]"
@@ -296,23 +297,12 @@ function PortfolioFooter() {
         </div>
       </div>
 
-      {/* Giant wordmark watermark */}
-      <div
-        aria-hidden
-        className="max-w-[1600px] mx-auto mt-[-30px] md:mt-[-50px] pointer-events-none select-none px-5 sm:px-8 md:px-12 lg:px-16"
-      >
-        <p
-          className="font-serif italic text-white/[0.06] leading-[0.85] tracking-[-0.04em] text-center"
-          style={{ fontSize: 'clamp(80px, 23vw, 360px)' }}
-        >
-          cinematic.lab
-        </p>
-      </div>
+      {/* Giant wordmark watermark — auto-fit SVG */}
+      <FooterWatermark />
 
       {/* Sub-copyright */}
-      <div className="max-w-[1600px] mx-auto mt-8 md:mt-4 px-5 sm:px-8 md:px-12 lg:px-16 flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono tracking-[0.22em] uppercase text-white/30">
-        <span>© 2026 antoine scie · tous droits réservés</span>
-        <span>made in annecy</span>
+      <div className="max-w-[1600px] mx-auto mt-8 md:mt-4 px-5 sm:px-8 md:px-12 lg:px-16 text-center text-[11px] font-mono tracking-[0.22em] uppercase text-white/30">
+        © 2026 antoine scie · tous droits réservés
       </div>
     </section>
   );
