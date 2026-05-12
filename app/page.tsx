@@ -115,12 +115,6 @@ export default function PortfolioIndex() {
             </span>
           </a>
 
-          <div className="hidden md:flex flex-col items-end gap-1 text-[11px] font-mono tracking-[0.22em] uppercase text-white/45">
-            <span>2026</span>
-            <span>
-              <span className="text-[#F27D26]">●</span> {TEMPLATES.length} sites
-            </span>
-          </div>
         </header>
 
         {/* Pitch */}
@@ -132,7 +126,7 @@ export default function PortfolioIndex() {
           </div>
           <div className="md:col-span-4 md:col-start-9 flex items-end">
             <p className="text-white/55 text-sm md:text-base leading-relaxed max-w-[320px]">
-              Chaque carte, une scène. Chaque scroll, un plan séquence. Bougez le curseur, regardez tourner.
+              Pas de mood boards : chaque carte est un site livré, capturé en boucle silencieuse. Cliquez pour entrer.
             </p>
           </div>
         </section>
@@ -147,36 +141,179 @@ export default function PortfolioIndex() {
           ))}
         </section>
 
-        {/* Footer */}
-        <footer className="pt-24 md:pt-32 pb-16 md:pb-20 grid grid-cols-1 md:grid-cols-12 gap-10">
-          <div className="md:col-span-7">
-            <p className="font-serif italic text-xl md:text-2xl tracking-[-0.02em] leading-[1.3] text-white max-w-[560px]">
-              Vous voulez un site qui claque autant que votre produit ?
+      </div>
+
+      {/* Footer — adapted from Kresna 2-card split + giant wordmark watermark */}
+      <PortfolioFooter />
+    </main>
+  );
+}
+
+function PortfolioFooter() {
+  return (
+    <section className="relative mt-24 md:mt-32 px-5 sm:px-8 md:px-12 lg:px-16 pb-20">
+      <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-4">
+        {/* Left card — video */}
+        <div className="relative overflow-hidden rounded-[28px] bg-[#141414] min-h-[360px] lg:min-h-[440px] p-7 md:p-8 flex flex-col justify-between shadow-[0_18px_50px_rgba(242,125,38,0.18)] ring-1 ring-white/8">
+          <video
+            src="/portfolio-previews/microvisuals.webm"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            className="absolute inset-0 w-full h-full object-cover opacity-95 pointer-events-none"
+            aria-hidden
+          />
+          {/* dark gradient bottom for legibility */}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/60 pointer-events-none"
+          />
+
+          <div className="relative z-10 flex items-center gap-3">
+            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden>
+              <circle cx="20" cy="20" r="19" stroke="#F5F5F5" strokeWidth="1.2" />
+              <line x1="6" y1="34" x2="34" y2="6" stroke="#F5F5F5" strokeWidth="1.2" strokeLinecap="round" />
+              <circle cx="20" cy="20" r="1.6" fill="#F27D26" />
+            </svg>
+            <span className="font-serif italic text-[22px] tracking-[-0.02em] leading-none text-white">
+              cinematic<span className="text-[#F27D26]">.</span>lab
+            </span>
+          </div>
+
+          <div className="relative z-10">
+            <p className="font-serif italic text-[26px] md:text-[30px] tracking-[-0.02em] leading-[1.1] text-white max-w-[340px]">
+              Un site qui claque autant que votre produit.
             </p>
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-3 mt-8">
+            <p className="mt-4 text-[13px] text-white/65 leading-relaxed max-w-[300px]">
+              Livré en 3 à 5 semaines. Disponible jusqu'à fin juin 2026.
+            </p>
+          </div>
+
+          <div className="relative z-10 flex items-center justify-between gap-3">
+            <span className="text-[11px] font-mono tracking-[0.22em] uppercase text-white/65">
+              Antoine, freelance front-end
+            </span>
+            <div className="flex items-center gap-2">
+              <a
+                href="https://www.linkedin.com/in/antoinescie/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn"
+                className="w-9 h-9 rounded-[10px] bg-black/60 ring-1 ring-white/15 grid place-items-center hover:bg-[#F27D26] hover:ring-[#F27D26] transition-colors"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="text-white">
+                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z" />
+                </svg>
+              </a>
               <a
                 href="mailto:antoine.scie@gmail.com"
-                className="inline-flex items-center gap-3 text-[12px] font-medium tracking-[0.18em] uppercase text-white border-b border-[#F27D26]/60 pb-1 hover:border-[#F27D26] transition-colors"
+                aria-label="Email"
+                className="w-9 h-9 rounded-[10px] bg-black/60 ring-1 ring-white/15 grid place-items-center hover:bg-[#F27D26] hover:ring-[#F27D26] transition-colors"
               >
-                antoine.scie@gmail.com
-                <span aria-hidden className="text-[#F27D26]">→</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 7 9 6 9-6" />
+                </svg>
               </a>
               <a
                 href="tel:+33681949021"
-                className="inline-flex items-center gap-3 text-[12px] font-medium tracking-[0.18em] uppercase text-white border-b border-[#F27D26]/60 pb-1 hover:border-[#F27D26] transition-colors"
+                aria-label="Téléphone"
+                className="w-9 h-9 rounded-[10px] bg-black/60 ring-1 ring-white/15 grid place-items-center hover:bg-[#F27D26] hover:ring-[#F27D26] transition-colors"
               >
-                +33 6 81 94 90 21
-                <span aria-hidden className="text-[#F27D26]">→</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-white">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
               </a>
             </div>
           </div>
-          <div className="md:col-span-4 md:col-start-9 flex md:justify-end items-end">
-            <span className="text-[11px] tracking-[0.18em] uppercase text-white/35 font-mono">
-              © 2026 · tous droits réservés
-            </span>
+        </div>
+
+        {/* Right card — content */}
+        <div className="relative bg-[#141414] rounded-[28px] p-8 md:p-10 ring-1 ring-white/8 overflow-visible">
+          {/* Floating orange badge — replaces Kresna's "Feeling lucky?" cube */}
+          <div
+            aria-hidden
+            className="hidden md:flex absolute -top-7 right-8 lg:right-10 z-10 flex-col items-end gap-1"
+          >
+            <div className="relative w-[88px] h-[88px] rounded-[20px] rotate-[-8deg] grid place-items-center"
+                 style={{
+                   background: 'linear-gradient(135deg, #F9B27D 0%, #F27D26 55%, #C7501B 100%)',
+                   boxShadow: 'inset 3px 3px 8px rgba(255,255,255,0.35), inset -3px -3px 12px rgba(0,0,0,0.18), 8px 14px 28px rgba(242,125,38,0.35)'
+                 }}>
+              <span
+                className="font-serif italic text-[40px] leading-none text-white"
+                style={{ transform: 'rotate(8deg)', letterSpacing: '-0.02em', textShadow: '0 3px 6px rgba(0,0,0,0.25)' }}
+              >
+                ·
+              </span>
+            </div>
+            <span className="font-serif italic text-[18px] text-white/45 -rotate-[6deg] mt-1">on tourne</span>
           </div>
-        </footer>
+
+          {/* Top — nav cols */}
+          <div className="flex flex-wrap gap-x-16 gap-y-10 pt-2">
+            <div>
+              <p className="font-serif italic text-[20px] text-white/40 mb-5">Navigation</p>
+              <ul className="flex flex-col gap-[14px]">
+                <li><a href="#projets" className="text-[14px] font-medium text-white hover:text-[#F27D26] transition-colors">Voir les sites</a></li>
+                <li><a href="/devis" className="text-[14px] font-medium text-white hover:text-[#F27D26] transition-colors">Demander un devis</a></li>
+                <li><a href="mailto:antoine.scie@gmail.com?subject=Process%20cinematic-lab" className="text-[14px] font-medium text-white hover:text-[#F27D26] transition-colors">Comprendre le process</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <p className="font-serif italic text-[20px] text-white/40 mb-5">Profil</p>
+              <ul className="flex flex-col gap-[14px]">
+                <li><a href="https://www.linkedin.com/in/antoinescie/" target="_blank" rel="noreferrer" className="text-[14px] font-medium text-white hover:text-[#F27D26] transition-colors">LinkedIn</a></li>
+                <li><a href="mailto:antoine.scie@gmail.com" className="text-[14px] font-medium text-white hover:text-[#F27D26] transition-colors">antoine.scie@gmail.com</a></li>
+                <li><a href="tel:+33681949021" className="text-[14px] font-medium text-white hover:text-[#F27D26] transition-colors">+33 6 81 94 90 21</a></li>
+                <li><span className="text-[14px] font-medium text-white/55">Basé à Annecy, FR</span></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom — copyright + CTA */}
+          <div className="mt-12 md:mt-14 flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+            <div>
+              <p className="text-[13px] text-white/55 leading-[1.45] max-w-[280px]">
+                Le calendrier 2026 tient encore deux projets.
+              </p>
+              <p className="mt-1 font-serif italic text-[20px] text-white tracking-[-0.01em]">
+                Prenez votre place.
+              </p>
+            </div>
+
+            <a
+              href="mailto:antoine.scie@gmail.com?subject=Demande%20de%20devis%20cinematic-lab"
+              className="inline-flex items-center gap-3 bg-[#F27D26] hover:bg-[#FF8A2E] text-black font-medium text-[14px] tracking-tight px-5 py-3 rounded-full shadow-[0_8px_24px_rgba(242,125,38,0.35)] hover:shadow-[0_12px_32px_rgba(242,125,38,0.5)] transition-all hover:scale-[1.02]"
+            >
+              <span>Démarrer un projet</span>
+              <span aria-hidden>→</span>
+            </a>
+          </div>
+        </div>
       </div>
-    </main>
+
+      {/* Giant wordmark watermark */}
+      <div
+        aria-hidden
+        className="max-w-[1600px] mx-auto mt-[-30px] md:mt-[-50px] pointer-events-none select-none px-5 sm:px-8 md:px-12 lg:px-16"
+      >
+        <p
+          className="font-serif italic text-white/[0.06] leading-[0.85] tracking-[-0.04em] text-center"
+          style={{ fontSize: 'clamp(80px, 23vw, 360px)' }}
+        >
+          cinematic.lab
+        </p>
+      </div>
+
+      {/* Sub-copyright */}
+      <div className="max-w-[1600px] mx-auto mt-8 md:mt-4 px-5 sm:px-8 md:px-12 lg:px-16 flex flex-wrap items-center justify-between gap-4 text-[11px] font-mono tracking-[0.22em] uppercase text-white/30">
+        <span>© 2026 antoine scie · tous droits réservés</span>
+        <span>made in annecy</span>
+      </div>
+    </section>
   );
 }
