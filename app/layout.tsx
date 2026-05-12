@@ -13,8 +13,8 @@ const serif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Cinematic Lab — Antoine",
-  description: "Lab d'entraînement sites cinematic premium",
+  title: "cinematic.lab",
+  description: "Sites cinematic premium animés au scroll, codés à la main pour un seul client.",
 };
 
 export default function RootLayout({
