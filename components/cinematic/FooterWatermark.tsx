@@ -28,7 +28,7 @@ export function FooterWatermark() {
   }, []);
 
   return (
-    <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-12 lg:px-16 mt-[-30px] md:mt-[-50px] pointer-events-none select-none">
+    <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-12 lg:px-16 mt-12 md:mt-16 pointer-events-none select-none">
       <svg
         ref={svgRef}
         viewBox="0 0 1000 200"
