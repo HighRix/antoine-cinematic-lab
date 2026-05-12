@@ -23,6 +23,7 @@ const SLUGS = [
   'stratus',
   'zenith',
   'tanli',
+  'weblex',
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

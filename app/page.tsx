@@ -11,6 +11,14 @@ export const metadata: Metadata = {
 
 const TEMPLATES: Project[] = [
   {
+    slug: '/weblex',
+    name: 'Weblex',
+    tagline: 'Smart website builder · hero vidéo dark + boucle seamless RAF + accent lime',
+    client: 'Concept SaaS site builder',
+    number: '11',
+    video: '/portfolio-previews/weblex.webm',
+  },
+  {
     slug: '/automation-machines',
     name: 'Automation Machines',
     tagline: 'Landing futuriste, Spline 3D background + gradient Orbitron + technical specs card',
