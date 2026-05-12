@@ -1,13 +1,20 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function Preloader() {
-  const [done, setDone] = useState(false);
+  const pathname = usePathname();
+  const previewMode =
+    typeof window !== 'undefined' && new URLSearchParams(window.location.search).has('preview');
+  const skip = pathname?.startsWith('/devis') || previewMode;
+  const [done, setDone] = useState(skip);
   useEffect(() => {
+    if (skip) return;
     const t = setTimeout(() => setDone(true), 1500);
     return () => clearTimeout(t);
-  }, []);
+  }, [skip]);
+  if (skip) return null;
   return (
     <AnimatePresence>
       {!done && (
