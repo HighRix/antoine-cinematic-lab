@@ -41,13 +41,15 @@ export function FooterWatermark() {
           x="500"
           y="160"
           textAnchor="middle"
-          fontSize="220"
-          fontStyle="italic"
-          fontFamily="var(--font-instrument-serif, 'Instrument Serif'), Georgia, serif"
-          fill="rgba(255,255,255,0.06)"
-          style={{ letterSpacing: '-0.04em' }}
+          fontSize="200"
+          fontWeight="800"
+          fontFamily="var(--font-inter, 'Inter'), system-ui, sans-serif"
+          fill="rgba(255,255,255,0.07)"
+          style={{ letterSpacing: '-0.045em', textTransform: 'lowercase' }}
         >
-          cinematic.lab
+          <tspan>cinematic</tspan>
+          <tspan fill="rgba(242,125,38,0.4)">.</tspan>
+          <tspan>lab</tspan>
         </text>
       </svg>
     </div>

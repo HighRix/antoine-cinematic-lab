@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { ProjectCard, type Project } from '@/components/cinematic/ProjectCard';
 import { FooterWatermark } from '@/components/cinematic/FooterWatermark';
+import { Logo } from '@/components/cinematic/Logo';
 
 export const metadata: Metadata = {
   title: 'Antoine · Cinematic Web Design',
@@ -97,25 +98,17 @@ export default function PortfolioIndex() {
       <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-12 lg:px-16">
         {/* Header */}
         <header className="pt-10 md:pt-14 pb-16 md:pb-24 flex items-center justify-between gap-8">
-          <a href="/" className="group inline-flex items-center gap-3" aria-label="Antoine — Studio">
-            <svg
-              width="34"
-              height="34"
-              viewBox="0 0 40 40"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden
-              className="transition-transform duration-500 group-hover:rotate-180"
-            >
-              <circle cx="20" cy="20" r="19" stroke="#F5F5F5" strokeWidth="1.2" />
-              <line x1="6" y1="34" x2="34" y2="6" stroke="#F5F5F5" strokeWidth="1.2" strokeLinecap="round" />
-              <circle cx="20" cy="20" r="1.6" fill="#F27D26" />
-            </svg>
-            <span className="font-serif italic text-[22px] md:text-[24px] tracking-[-0.02em] leading-none text-white">
-              cinematic<span className="text-[#F27D26]">.</span>lab
-            </span>
+          <a
+            href="/"
+            className="group inline-flex items-center transition-opacity hover:opacity-80"
+            aria-label="cinematic.lab — Antoine Scie"
+          >
+            <Logo
+              size={32}
+              gap={12}
+              wordmarkClassName="text-[20px] md:text-[22px] text-white"
+            />
           </a>
-
         </header>
 
         {/* Pitch */}
@@ -126,8 +119,8 @@ export default function PortfolioIndex() {
             </p>
           </div>
           <div className="md:col-span-4 md:col-start-9 flex items-end">
-            <p className="text-white/55 text-sm md:text-base leading-relaxed max-w-[320px]">
-              Pas de mood boards : chaque carte est un site livré, capturé en boucle silencieuse. Cliquez pour entrer.
+            <p className="text-white/55 text-sm md:text-base leading-relaxed max-w-[340px]">
+              Du sur-mesure codé à la main : chaque site est un exemplaire unique, livré à un seul client. Cliquez pour entrer.
             </p>
           </div>
         </section>
@@ -173,15 +166,8 @@ function PortfolioFooter() {
             className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/60 pointer-events-none"
           />
 
-          <div className="relative z-10 flex items-center gap-3">
-            <svg width="32" height="32" viewBox="0 0 40 40" fill="none" aria-hidden>
-              <circle cx="20" cy="20" r="19" stroke="#F5F5F5" strokeWidth="1.2" />
-              <line x1="6" y1="34" x2="34" y2="6" stroke="#F5F5F5" strokeWidth="1.2" strokeLinecap="round" />
-              <circle cx="20" cy="20" r="1.6" fill="#F27D26" />
-            </svg>
-            <span className="font-serif italic text-[22px] tracking-[-0.02em] leading-none text-white">
-              cinematic<span className="text-[#F27D26]">.</span>lab
-            </span>
+          <div className="relative z-10">
+            <Logo size={32} gap={12} wordmarkClassName="text-[20px] text-white" />
           </div>
 
           <div className="relative z-10">
