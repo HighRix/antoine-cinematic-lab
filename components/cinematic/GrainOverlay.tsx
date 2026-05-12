@@ -1,4 +1,9 @@
+'use client';
+import { usePathname } from 'next/navigation';
+
 export function GrainOverlay() {
+  const pathname = usePathname();
+  if (pathname?.startsWith('/devis')) return null;
   return (
     <div
       className="pointer-events-none fixed inset-0 z-[60] opacity-[0.08] mix-blend-overlay"

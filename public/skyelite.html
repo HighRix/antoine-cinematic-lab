@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-dim": "#b8b9b9",
+                        "outline": "#5f75a5",
+                        "on-tertiary": "#555c69",
+                        "accent-noir": "#202A36",
+                        "error-dim": "#bb5551",
+                        "on-tertiary-fixed-variant": "#565e6b",
+                        "on-error-container": "#ff9993",
+                        "surface-dim": "#070e1d",
+                        "on-secondary-container": "#b6c0d0",
+                        "tertiary-fixed": "#dfe5f6",
+                        "on-background": "#dde5ff",
+                        "secondary": "#949fae",
+                        "surface-container-low": "#081328",
+                        "tertiary-dim": "#d1d7e7",
+                        "tertiary-container": "#dfe5f6",
+                        "surface-bright": "#062a5f",
+                        "secondary-container": "#323c49",
+                        "on-surface": "#dde5ff",
+                        "on-primary-fixed": "#3e4040",
+                        "tertiary": "#f0f3ff",
+                        "on-surface-variant": "#95abde",
+                        "primary-fixed-dim": "#d4d4d4",
+                        "secondary-fixed-dim": "#cbd5e5",
+                        "on-primary-fixed-variant": "#5a5c5c",
+                        "on-tertiary-fixed": "#3a414e",
+                        "on-primary-container": "#d0d0d0",
+                        "surface-container-lowest": "#000000",
+                        "on-secondary-fixed": "#36404d",
+                        "on-secondary": "#17212d",
+                        "primary": "#c6c6c7",
+                        "background": "#070e1d",
+                        "tertiary-fixed-dim": "#d1d7e7",
+                        "surface-variant": "#082450",
+                        "error-container": "#7f2927",
+                        "surface": "#070e1d",
+                        "inverse-surface": "#f9f9ff",
+                        "outline-variant": "#314774",
+                        "on-secondary-fixed-variant": "#525c6a",
+                        "on-tertiary-container": "#4d5461",
+                        "on-error": "#490106",
+                        "secondary-dim": "#949fae",
+                        "primary-container": "#454747",
+                        "inverse-on-surface": "#4e5566",
+                        "surface-container-highest": "#082450",
+                        "inverse-primary": "#5e5f60",
+                        "primary-fixed": "#e2e2e2",
+                        "surface-tint": "#c6c6c7",
+                        "surface-container-high": "#091f42",
+                        "error": "#ee7d77",
+                        "on-primary": "#3f4041",
+                        "secondary-fixed": "#d9e3f4",
+                        "surface-container": "#091935"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .hero-overlap { margin-top: -0.15em; }
+        .glass-panel {
+            background: rgba(8, 19, 40, 0.4);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(149, 171, 222, 0.1);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(221, 229, 255, 0.2);
+        }
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .membership-card {
+            transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+        }
+        .membership-card:hover {
+            transform: rotateX(5deg) rotateY(-5deg);
+        }
+        .reveal-on-hover .overlay {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .reveal-on-hover:hover .overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface overflow-x-hidden">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/60 backdrop-blur-xl shadow-2xl shadow-black/50 transition-all duration-300">
+<nav class="flex justify-between items-center px-8 py-6 max-w-full">
+<div class="text-2xl font-semibold tracking-tighter text-slate-100 font-inter">
+                SkyElite
+            </div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-inter tracking-tight" href="#fleet">Fleet</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-inter tracking-tight" href="#experience">Experience</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-inter tracking-tight" href="#safety">Safety</a>
+<a class="text-slate-400 hover:text-slate-200 transition-colors font-inter tracking-tight" href="#destinations">Destinations</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="hidden md:block bg-primary text-on-primary rounded-full px-8 py-2.5 text-sm font-semibold hover:bg-primary-dim transition-all duration-300 active:scale-95 shadow-lg shadow-primary/20">
+                    Inquire
+                </button>
+<button class="text-slate-200 md:hidden p-2 hover:bg-white/5 rounded-full transition-all duration-300" data-icon="menu">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+</header>
+<!-- Hero Section -->
+<main class="relative h-screen w-full flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<video aria-hidden="true" autoplay="" class="w-full h-full object-cover grayscale-[30%] contrast-[1.1]" loop="" muted="" playsinline="">
+<source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_091828_e240eb17-6edc-4129-ad9d-98678e3fd238.mp4" type="video/mp4"/>
+</video>
+<div class="absolute inset-0 bg-gradient-to-b from-surface/80 via-transparent to-surface/90"></div>
+<div class="absolute inset-0 bg-black/20"></div>
+</div>
+<div class="relative z-10 container mx-auto px-6 flex flex-col items-center text-center -mt-32 md:-mt-48">
+<div class="mb-6">
+<span class="text-sm font-bold tracking-[0.25em] text-on-surface-variant uppercase bg-surface-container-high/40 backdrop-blur-md px-5 py-2 rounded-full border border-outline-variant/20">
+                    PRIVATE JETS
+                </span>
+</div>
+<div class="flex flex-col items-center select-none">
+<h1 class="text-6xl md:text-[8rem] lg:text-[10rem] font-normal leading-none tracking-tighter text-slate-400 opacity-90 transition-all duration-700">
+                    Premium.
+                </h1>
+<h2 class="text-6xl md:text-[8rem] lg:text-[10rem] font-semibold leading-none tracking-tighter text-on-surface hero-overlap drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)] transition-all duration-700">
+                    Accessible.
+                </h2>
+</div>
+<p class="mt-8 text-lg md:text-2xl font-light max-w-2xl leading-relaxed">
+                Your dedication deserves recognition. Experience the pinnacle of aviation with an editorial approach to global travel.
+            </p>
+<div class="mt-12 flex flex-col sm:flex-row gap-6">
+<button class="group relative px-10 py-5 rounded-full bg-primary text-on-primary font-semibold text-lg overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(198,198,199,0.3)] hover:-translate-y-1 active:scale-95">
+<span class="relative z-10 flex items-center gap-2">
+                        Book Now
+                        <span class="material-symbols-outlined text-xl transition-transform group-hover:translate-x-1">arrow_forward</span>
+</span>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary-dim to-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</button>
+<a class="px-10 py-5 rounded-full bg-surface-container-highest/60 backdrop-blur-xl text-on-surface font-semibold text-lg border border-outline-variant/30 hover:bg-surface-container-highest/90 transition-all duration-300 hover:-translate-y-1 active:scale-95 text-center" href="#fleet">
+                    Discover Fleet
+                </a>
+</div>
+</div>
+<a class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-50 hover:opacity-100 transition-opacity duration-500 cursor-pointer" href="#fleet">
+<span class="text-[0.65rem] font-bold tracking-[0.3em] uppercase text-on-surface-variant">Elevate</span>
+<div class="w-[1px] h-12 bg-gradient-to-b from-primary to-transparent"></div>
+</a>
+</main>
+<!-- Fleet Showcase Section -->
+<section class="relative bg-surface py-32 px-8 overflow-hidden" id="fleet">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-2xl">
+<h2 class="text-xs font-bold tracking-[0.3em] text-primary uppercase mb-4">The Collection</h2>
+<p class="text-4xl md:text-5xl font-semibold text-on-surface leading-tight">Masterpieces of the skies.</p>
+</div>
+<p class="text-on-surface-variant max-w-sm text-lg font-light leading-relaxed">
+                    Meticulously maintained and configured for absolute comfort. Explore our curated selection of ultra-long-range aircraft.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="group relative bg-accent-noir/40 rounded-2xl overflow-hidden border border-outline-variant/10 hover:border-outline-variant/30 transition-all duration-500">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Bombardier Global 7500 flying through clouds at dusk" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDraDJL_cA7Q5nDYZTitMEivVEHrsvUcMG8k19gsokhAmZBFL4bh_5Ky9UA7IKhQ2FrVpoCaZAop0rQuV6pBiN41Xy1Lhmnv3axONWIw7gLNy1prgUttLfreKJuIfxQdrUR8Q2phqxgfC5cvZp0xZbiQvX7RX6sSXwuAXQBOtmVBJQ4baZDIktQeNjua2CV2qF3yKsoaqZxj4Hjf17kwPu1uAEvP6roRsHFUALGC65egMQa4kTgh4rvyL2Dvg9v5Icc1V_hY-bXYgiV"/>
+</div>
+<div class="p-10">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="text-3xl font-semibold text-on-surface">Global 7500</h3>
+<p class="text-on-surface-variant mt-1">Bombardier Aerospace</p>
+</div>
+<span class="bg-primary/10 text-primary-dim px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest">Flagship</span>
+</div>
+<div class="grid grid-cols-3 gap-4 py-8 border-y border-outline-variant/10">
+<div>
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-widest mb-1">Range</p>
+<p class="text-xl font-light">7,700 nm</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-widest mb-1">Speed</p>
+<p class="text-xl font-light">Mach 0.925</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-widest mb-1">Seating</p>
+<p class="text-xl font-light">Up to 19</p>
+</div>
+</div>
+<button class="mt-8 text-primary font-semibold flex items-center gap-2 group/btn">
+                            View Specifications
+                            <span class="material-symbols-outlined text-xl transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="group relative bg-accent-noir/40 rounded-2xl overflow-hidden border border-outline-variant/10 hover:border-outline-variant/30 transition-all duration-500">
+<div class="aspect-[16/10] overflow-hidden">
+<img alt="Gulfstream G700 private jet on the tarmac in silhouette" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGLQdtd8O7PjgLkQQEvcVe98ogJeTbKlDlU809ZHWs7rbO6gNM911vEwKtAgQogJp0ACxtDEg23TTARR8zS2oc-UQr_2DYzzl2-QtsXWPnw8CSPdfsaUXHj3pOxLtKA35YGWWWiCmAPxObjhmGJKTmHu9V4llCRyLpBeeHQ7vw1XoYbPkrkbwdGCGGwoxK-6255dbJTLvDnKz5S0OWEX2iNVfGXSGD4PXTOIlNRiSg7m-Utk7fxl9-aS55EC1GIbQUyb3KIFAPKrYr"/>
+</div>
+<div class="p-10">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="text-3xl font-semibold text-on-surface">Gulfstream G700</h3>
+<p class="text-on-surface-variant mt-1">Gulfstream Aerospace</p>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 py-8 border-y border-outline-variant/10">
+<div>
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-widest mb-1">Range</p>
+<p class="text-xl font-light">7,500 nm</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-widest mb-1">Speed</p>
+<p class="text-xl font-light">Mach 0.925</p>
+</div>
+<div>
+<p class="text-xs text-on-surface-variant uppercase font-bold tracking-widest mb-1">Seating</p>
+<p class="text-xl font-light">Up to 19</p>
+</div>
+</div>
+<button class="mt-8 text-primary font-semibold flex items-center gap-2 group/btn">
+                            View Specifications
+                            <span class="material-symbols-outlined text-xl transition-transform group-hover/btn:translate-x-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- The Experience Section -->
+<section class="relative bg-surface-container-low py-32 px-8" id="experience">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="relative">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
+<img alt="Bright and airy ultra-premium luxury private jet terminal lounge" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQfi6KKcuU6NwSwU9If03XrgC1BT-ro6JXfJRnz2_8EdlxaOVMcRbagSmMlTSIkYdZ2_VbqzloFdA1ldS-HgFgVklKinDM6kmsZG55QCQ0JgxJH8B9w77qy7L2ihdRdffF_936eAMkTIzEEWiw2dTITPQfS58m_FAZq3xebXO1sYa3z7SY4eYyAd6NlngMk85NpNcn9poWOy40gKEqz_MPZlhokjTqZN0QgCF4TQuzH3Gg5-YU2J1JvpCJC2iGr5lyKOfeDo5mrFKN"/>
+</div>
+<div class="absolute -bottom-10 -right-10 hidden md:block w-72 aspect-square rounded-2xl overflow-hidden border-8 border-surface-container-low shadow-2xl">
+<img alt="Fine dining presentation on a private jet table" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6a-XrO48TtFsr1lYVjbJLQx8yucUTTMpjljoazbHnXkel6zQJHEZ_ySqwP3ad4UTJwNOLuYfxYblTj7WI2fkY5liHmJgNCa9J47q0kIyl8XY2eDd7dQitzOvSl56B2uxk-Q1c14C1L5rRJKCu2GZhCGmIGi-5M-TtS4LQ0ijYphmpUQU0t03VAahYr8QIANXLRUnBezhtRYmCXizdWyyEg2v8Y6LOOoe_4Iimfad65-3hjjmfvQBTxvjaOblttQYdI83rKu3j654a"/>
+</div>
+</div>
+<div>
+<h2 class="text-xs font-bold tracking-[0.3em] text-primary-dim uppercase mb-6">Unrivaled Journey</h2>
+<h3 class="text-5xl font-semibold text-on-surface mb-8 leading-tight">Beyond the destination.</h3>
+<div class="space-y-10">
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-primary text-3xl">restaurant</span>
+<div>
+<h4 class="text-xl font-semibold text-on-surface mb-2">Bespoke Gastronomy</h4>
+<p class="text-on-surface-variant leading-relaxed">Michelin-standard menus curated to your preferences, prepared fresh at forty thousand feet.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-primary text-3xl">concierge</span>
+<div>
+<h4 class="text-xl font-semibold text-on-surface mb-2">Personal Concierge</h4>
+<p class="text-on-surface-variant leading-relaxed">Dedicated travel specialists managing every detail from ground transport to exclusive event access.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-primary text-3xl">flight_land</span>
+<div>
+<h4 class="text-xl font-semibold text-on-surface mb-2">Private Terminals</h4>
+<p class="text-on-surface-variant leading-relaxed">Bypass the crowds with exclusive access to premium FBOs worldwide, ensuring total privacy and efficiency.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Safety & Reliability Section: Upgraded -->
+<section class="relative bg-surface py-40 px-8 overflow-hidden" id="safety">
+<div class="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-10">
+<span class="absolute -top-20 -right-20 text-[30rem] font-black text-on-surface-variant leading-none tracking-tighter select-none">SAFE</span>
+</div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-24">
+<div class="lg:col-span-7">
+<h2 class="text-xs font-bold tracking-[0.4em] text-primary uppercase mb-6 flex items-center gap-4">
+<span class="w-12 h-px bg-primary/40"></span> Engineering Excellence
+                    </h2>
+<h3 class="text-5xl md:text-7xl font-semibold text-on-surface tracking-tighter leading-tight mb-8">
+                        Uncompromising <br/> <span class="italic font-light text-primary-dim">Standards.</span>
+</h3>
+<p class="text-xl text-on-surface-variant font-light max-w-xl leading-relaxed">
+                        At SkyElite, safety isn't a checklist—it's an obsession. We operate with a standard that transcends industry requirements, merging advanced aerospace engineering with elite human capability.
+                    </p>
+</div>
+<div class="lg:col-span-5 lg:pt-16">
+<div class="relative group">
+<div class="aspect-[4/3] rounded-2xl overflow-hidden border border-outline-variant/20 shadow-2xl">
+<img alt="Close up of aircraft engine turbine maintenance with expert technician" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_pu6V9jFpUUjNr2bzKytBy8ZeyiumzVRrpXVoWHv9gyEL8lBsTcS30eRQhK6SrFZ6fnjcvWdClm0QhD5zUHbdHuTKdrp-FGtBrN3k27N4hZbB_CfrY5OSXNXTZnXcAQWNG8bbRqtyheBMjhqc9bHhA2o3zSuiyGpXQ9KY5PjDVsjCDYga6WScwbQ0MfkH5HvxlNIRHGis9PAuDCokoKoiUfNdedZuEwA-k8mYRJ21X14ImYRmQ9wyaNgnC01yGCDIPoPGlvgh5WnW"/>
+</div>
+<div class="absolute -top-6 -left-6 bg-surface-container-high/90 backdrop-blur-md p-6 rounded-xl border border-outline-variant/30 shadow-xl hidden md:block">
+<p class="text-3xl font-bold text-white mb-1">0.0%</p>
+<p class="text-[0.6rem] font-bold tracking-widest text-primary uppercase">Incident Rate</p>
+</div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="group relative overflow-hidden rounded-2xl glass-panel p-8 transition-all duration-500 hover:-translate-y-2 hover:bg-surface-container-highest/40">
+<div class="relative z-10">
+<div class="w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+</div>
+<h4 class="text-2xl font-semibold text-white mb-4">Certified Elite</h4>
+<p class="text-on-surface-variant font-light leading-relaxed mb-6">Holding ARG/US Platinum and Wyvern Wingman status—the rarest accreditation tier in private aviation worldwide.</p>
+<div class="h-1 w-0 bg-primary group-hover:w-full transition-all duration-500 rounded-full"></div>
+</div>
+<div class="absolute bottom-0 right-0 opacity-5 group-hover:opacity-10 transition-opacity translate-x-1/4 translate-y-1/4">
+<span class="material-symbols-outlined text-[10rem]">shield</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative overflow-hidden rounded-2xl glass-panel p-8 transition-all duration-500 hover:-translate-y-2 hover:bg-surface-container-highest/40 md:mt-12">
+<div class="relative z-10">
+<div class="w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-3xl">engineering</span>
+</div>
+<h4 class="text-2xl font-semibold text-white mb-4">Proactive Care</h4>
+<p class="text-on-surface-variant font-light leading-relaxed mb-6">Our 'Health-Check' systems monitor real-time airframe telemetry, predicting maintenance needs before they arise.</p>
+<div class="h-1 w-0 bg-primary group-hover:w-full transition-all duration-500 rounded-full"></div>
+</div>
+<div class="absolute bottom-0 right-0 opacity-5 group-hover:opacity-10 transition-opacity translate-x-1/4 translate-y-1/4">
+<span class="material-symbols-outlined text-[10rem]">settings</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group relative overflow-hidden rounded-2xl glass-panel p-8 transition-all duration-500 hover:-translate-y-2 hover:bg-surface-container-highest/40">
+<div class="relative z-10">
+<div class="w-14 h-14 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-3xl">flight</span>
+</div>
+<h4 class="text-2xl font-semibold text-white mb-4">Commanding Skill</h4>
+<p class="text-on-surface-variant font-light leading-relaxed mb-6">Captains must exceed 10,000 flight hours and undergo simulator training twice as often as industry mandates.</p>
+<div class="h-1 w-0 bg-primary group-hover:w-full transition-all duration-500 rounded-full"></div>
+</div>
+<div class="absolute bottom-0 right-0 opacity-5 group-hover:opacity-10 transition-opacity translate-x-1/4 translate-y-1/4">
+<span class="material-symbols-outlined text-[10rem]">airline_seat_recline_extra</span>
+</div>
+</div>
+</div>
+<!-- Accreditations Row -->
+<div class="mt-32 pt-16 border-t border-outline-variant/10 flex flex-wrap justify-between items-center gap-12 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-700">
+<span class="text-xl font-bold tracking-tighter text-on-surface">ARG/US PLATINUM</span>
+<span class="text-xl font-bold tracking-tighter text-on-surface">WYVERN WINGMAN</span>
+<span class="text-xl font-bold tracking-tighter text-on-surface">IS-BAO STAGE 3</span>
+<span class="text-xl font-bold tracking-tighter text-on-surface">EASA COMPLIANT</span>
+<span class="text-xl font-bold tracking-tighter text-on-surface">FAA PART 135</span>
+</div>
+</div>
+</section>
+<!-- Destinations Section -->
+<section class="relative py-32 px-8 overflow-hidden" id="destinations">
+<div class="absolute inset-0 bg-surface-container-low opacity-50"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-baseline mb-16 gap-4">
+<div class="max-w-2xl">
+<h2 class="text-xs font-bold tracking-[0.3em] text-primary uppercase mb-4">Global Reach</h2>
+<h3 class="text-4xl md:text-5xl font-semibold text-on-surface leading-tight">The world, on your terms.</h3>
+</div>
+<button class="text-on-surface font-medium border-b border-primary/50 hover:border-primary transition-all pb-1 flex items-center gap-2">
+                    Explore Routes
+                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer">
+<img alt="Courchevel, France" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1py7mxE_kFIf-_KE6PBvk2W8czKdzXZrCWAWTuI4tdSY2SniIsBkd2TRZXHGBUxbG5ecETYch7gnNgw_ckGz0j2tYyHUMMb04Gl665yKkFM9iuBbIjg3bxYMDHxJuf9pStf4hCyUZb-f4lvT5_RNuEJtb0KiDGjYDPYc7XGu__svAr8xvPtRIp9gZ-IKDNrq6UAYViavED8OwV9hG-GjWHgcOak8iP_r_sMozZ9RLMJZrXsqYpSptwhj1UcZscyTROB9W0dtwYQv"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<p class="text-xs font-bold tracking-widest text-primary-dim uppercase mb-1">Alps</p>
+<h4 class="text-2xl font-semibold text-white">Courchevel</h4>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer">
+<img alt="Maldives" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8d6wiFEhETbZC2fhIZwe-sB0kJYTaVZeFXmJ5khV5oPTBWrsihHXmUBHRRDt7fwVdZoSLdZte1r9XLXo8n7CB_WptXoQA1UmUVC_llU-wWf6UUukgB4Kmuv45PE71_Y6BQnApJw4w4WCOc2QHfZKjUZdMIkkMx-1CDDQ6eoMR8EP5rbk0h8SMUxaWksrLmg4Lr93VN6YiDV4pdN5h2WjUcyClRhd1nGRuMmWd2seLO_2AfEGr9OeABDYb9yoONW9RWHP9iN308vxl"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<p class="text-xs font-bold tracking-widest text-primary-dim uppercase mb-1">Island</p>
+<h4 class="text-2xl font-semibold text-white">Maldives</h4>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer md:mt-12">
+<img alt="Aspen" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA85vZQFFybbv_VASL7AouMlgcHHCnSQi7xjMPillUI3WGRRJzz61T0zfBVQDNDP09YnzqePZM7yQ0LPtKHLcQK-Dwsmd2VtCw0t69GRiOrruabEqTERb5hd99gSNX4KRj6G5bs6hMD3q5V_eaHdv-zRqMExwMc-WMA0fcpCCfMrKd3hO8IfXrEAmA6mqnd4Qm-6tAcw0NhpSUuFSL6ogHmAiby6UaWp6mMsquFSZL_0u_zs4z1S8nCXDLvznf7_ynIZznfmv7ZL5Uj"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<p class="text-xs font-bold tracking-widest text-primary-dim uppercase mb-1">Winter</p>
+<h4 class="text-2xl font-semibold text-white">Aspen</h4>
+</div>
+</div>
+<div class="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer md:mt-12">
+<img alt="Tokyo" class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2m6a1pfvJyV0EHV0lq5s03yXTDcOZoH4kRcTgNVPiHo6mjqvNmkwSu_3oZrDC1AzdseqeyoHvk2u2B2zVTAkbRnikGdb6IYT1YdQUnbhU2FozXZI9V4layriIPPGG6hrnoviOMZMGggEZ4qqPF_PiHrheCQpiF2cp64U8KlIJlE7GRjp1Go3HTePFpRC2yxfR0AG-ww_7NwTQ6pMc0_XN54kF4y-vwSBi16-Lm-vNazyOExzkszhNd3xa8GogP9rJnRbWUXGI-Gc3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<p class="text-xs font-bold tracking-widest text-primary-dim uppercase mb-1">Metropolis</p>
+<h4 class="text-2xl font-semibold text-white">Tokyo</h4>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials Section -->
+<section class="relative bg-surface py-32 px-8 overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-outline-variant/20 to-transparent"></div>
+<div class="max-w-4xl mx-auto text-center">
+<span class="material-symbols-outlined text-primary/30 text-6xl mb-8" data-weight="fill">format_quote</span>
+<blockquote class="text-2xl md:text-4xl font-light italic text-on-surface leading-snug mb-12">
+                "SkyElite has fundamentally redefined how I approach global business. The seamlessness of the service and the uncompromising quality of the fleet is truly in a class of its own."
+            </blockquote>
+<div class="flex flex-col items-center">
+<img alt="Julian Sterling" class="w-16 h-16 rounded-full object-cover mb-4 border border-outline-variant/20 shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-UXFjTTNnENghosz8mGtDO9tnMsOcbsCJDDdjOQJxgiWxOjcQhrHbq8XHOyF90dPXK7yyOeRRFrxX1LhcPxDVGMeLw_niENv8VJwS_4IDRAFlNi5C-Di_R6wKhBm9uhpNSjHtRW3zUS75Kox5tTUTeimBhVgWiq3124JkVcg4kCO--zMYmAnSTMsjKR-mUU4-WrflkUWXzliLixQXr073zj73o1f8jCK3wSMoKIncCbrZbt9iinUy6YxOgoq317H156UNrH0iA0Qy"/>
+<p class="text-on-surface font-semibold">Julian Sterling</p>
+<p class="text-on-surface-variant text-sm uppercase tracking-widest mt-1">Founder, Meridian Global</p>
+</div>
+</div>
+</section>
+<!-- Membership/CTA Section -->
+<section class="relative py-32 px-8 overflow-hidden" id="membership">
+<div class="absolute inset-0 z-0">
+<img alt="Abstract cinematic background" class="w-full h-full object-cover opacity-20 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7Fs1bmRIoZ1cparOuUf5ssIHkEFwr1IvhTWzuQXv2bEgdUhhuUYDoecPwWNp-8zgpbg_F5aWWPiujzLF97htGOMkx_r11p3ndd0iPb4Y10K5P5zseDmos8kgGEdaxeaCnnv68OVu9JEXbcrUOKNqS9cq-3-4rXT8rw2-DJix2fEtNOuqpeqvUs3LoeJ-8fZ5LNDMuBkxZTN7gupf7_NtUTXy24Zpi7nebkXYWtCvmHXZAMVg8jzOAugzFrmncymYbPX0FaLV4hjU3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/90 to-surface/80"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-12">
+<div class="space-y-4">
+<p class="text-[0.65rem] font-bold tracking-[0.4em] text-on-surface-variant uppercase">Invitation Only</p>
+<h2 class="text-3xl font-bold tracking-tight text-white uppercase">The SkyElite Circle</h2>
+</div>
+<p class="text-lg text-on-surface-variant font-light max-w-lg leading-relaxed">
+                        Our membership offers more than just flight. It grants entry into an ecosystem of unparalleled service, priority fleet access, and exclusive partner lifestyle events.
+                    </p>
+<div class="space-y-8">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center bg-primary/5">
+<span class="material-symbols-outlined text-primary text-xl">verified</span>
+</div>
+<div>
+<h4 class="text-white font-semibold">Priority Dispatch</h4>
+<p class="text-on-surface-variant text-sm">Guaranteed aircraft in as little as 10 hours.</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 rounded-full border border-primary/30 flex items-center justify-center bg-primary/5">
+<span class="material-symbols-outlined text-primary text-xl">stars</span>
+</div>
+<div>
+<h4 class="text-white font-semibold">Bespoke Concierge</h4>
+<p class="text-on-surface-variant text-sm">Lifestyle management for every ground-based detail.</p>
+</div>
+</div>
+</div>
+<button class="mt-12 bg-white text-black px-10 py-5 rounded-full font-bold text-xs uppercase tracking-[0.2em] hover:bg-slate-200 transition-all shadow-xl shadow-white/5 active:scale-95">
+                        Inquire for Membership
+                    </button>
+</div>
+<div class="flex justify-center perspective-1000">
+<div class="membership-card group relative w-full max-w-md aspect-[1.58/1] bg-gradient-to-br from-[#1a1c1e] to-[#0a0b0c] rounded-2xl p-8 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.8)] border border-white/5 flex flex-col justify-between transition-all duration-500 transform-gpu hover:shadow-[0_60px_120px_-20px_rgba(0,0,0,0.9)] hover:border-white/20">
+<div class="flex justify-between items-start relative z-10">
+<div class="text-2xl font-bold tracking-tighter text-white">SkyElite</div>
+<span class="material-symbols-outlined text-white/40 text-2xl">aperture</span>
+</div>
+<div class="relative z-10 space-y-6">
+<div>
+<p class="text-[0.6rem] tracking-[0.2em] uppercase text-on-surface-variant font-bold mb-1">Member Since</p>
+<div class="text-3xl font-light tracking-[0.3em] text-white">2024.08.15</div>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[0.5rem] tracking-[0.2em] uppercase text-on-surface-variant font-bold mb-1">Cardholder</p>
+<div class="text-lg tracking-[0.1em] font-semibold text-white/90">JULIAN STERLING</div>
+</div>
+<div class="w-12 h-8 rounded-lg bg-gradient-to-br from-white/10 to-transparent border border-white/5"></div>
+</div>
+</div>
+<div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-tr from-primary/10 via-transparent to-white/5 pointer-events-none"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Shell -->
+<footer class="bg-slate-950 w-full py-20 px-8 transition-all duration-200">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+<div class="md:col-span-1">
+<div class="text-2xl font-bold text-slate-200 font-inter tracking-tight mb-6">SkyElite</div>
+<p class="text-slate-400 font-inter text-sm leading-relaxed max-w-xs">
+                    Redefining the standards of private aviation through meticulous curation and unwavering commitment to excellence.
+                </p>
+</div>
+<div>
+<h4 class="text-slate-200 font-semibold mb-6">Company</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">About Us</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">Our Story</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">Press Relations</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">Careers</a>
+</nav>
+</div>
+<div>
+<h4 class="text-slate-200 font-semibold mb-6">Services</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">On-Demand Charter</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">Jet Cards</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">Ownership</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">Management</a>
+</nav>
+</div>
+<div>
+<h4 class="text-slate-200 font-semibold mb-6">Connect</h4>
+<nav class="flex flex-col gap-4">
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">Instagram</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">LinkedIn</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm" href="#">Contact Support</a>
+</nav>
+</div>
+</div>
+<div class="max-w-7xl mx-auto pt-12 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-8">
+<p class="text-slate-500 font-inter text-xs tracking-wide">© 2024 SkyElite Aviation. All Rights Reserved.</p>
+<div class="flex gap-8">
+<a class="text-slate-600 hover:text-slate-300 font-inter text-xs tracking-wide underline decoration-slate-800 underline-offset-4 transition-all duration-200" href="#">Privacy Policy</a>
+<a class="text-slate-600 hover:text-slate-300 font-inter text-xs tracking-wide underline decoration-slate-800 underline-offset-4 transition-all duration-200" href="#">Terms of Service</a>
+<a class="text-slate-600 hover:text-slate-300 font-inter text-xs tracking-wide underline decoration-slate-800 underline-offset-4 transition-all duration-200" href="#">Cookies</a>
+</div>
+</div>
+</footer>
+</body></html>

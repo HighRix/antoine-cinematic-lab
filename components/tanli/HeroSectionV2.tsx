@@ -317,27 +317,6 @@ export function HeroSectionV2() {
 
       {/* Hero content — bottom-left */}
       <div className="relative z-10 px-6 sm:px-8 lg:px-16 pb-16 lg:pb-20 pt-32 mt-auto pointer-events-none">
-        {/* Eyebrow with pulsing dot */}
-        <div
-          className="inline-flex items-center gap-2.5 mb-7 px-3 py-1.5 rounded-full tanli-fade-up"
-          style={{
-            background: GREEN_SOFT,
-            border: '1px solid rgba(3, 232, 64, 0.25)',
-            animationDelay: '120ms',
-          }}
-        >
-          <span
-            className="tanli-pulse-dot inline-block w-1.5 h-1.5 rounded-full"
-            style={{ background: GREEN }}
-          />
-          <span
-            className="text-[10px] uppercase tracking-[0.22em] font-semibold"
-            style={{ color: GREEN }}
-          >
-            Disponible · 7j/7 · Marignier
-          </span>
-        </div>
-
         <h1
           className="text-6xl sm:text-7xl lg:text-[7rem] font-light leading-[0.92] tracking-tight max-w-[820px] tanli-fade-up tanli-title-glow"
           style={{
@@ -456,22 +435,6 @@ export function HeroSectionV2() {
         <PartnerMarquee />
       </div>
 
-      {/* Discrete scroll cue, bottom-right */}
-      <div
-        aria-hidden
-        className="hidden lg:flex absolute right-8 bottom-24 z-10 flex-col items-center gap-3"
-        style={{ color: '#666' }}
-      >
-        <span className="text-[9px] uppercase tracking-[0.3em]" style={{ writingMode: 'vertical-rl' }}>
-          Scroll
-        </span>
-        <span className="w-px h-10 relative overflow-hidden" style={{ background: 'rgba(255,255,255,0.1)' }}>
-          <span
-            className="tanli-scroll-cue-bar absolute inset-x-0 top-0 h-3 block"
-            style={{ background: GREEN }}
-          />
-        </span>
-      </div>
     </section>
   );
 }
