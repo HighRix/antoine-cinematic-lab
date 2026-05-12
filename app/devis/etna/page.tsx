@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const QUOTE = {
-  number: 'DEV-2026-001',
+  number: 'DEV-2026-013',
   emittedOn: '8 mai 2026',
   validUntil: '7 juin 2026',
   deliveryDays: '2 semaines (10 jours ouvrés)',
@@ -17,7 +17,7 @@ const FROM = {
   name: 'Antoine SCIÉ',
   brand: 'cinematic.lab',
   vat: 'TVA non applicable, art. 293 B du CGI',
-  address: '22 Rue de Mussel, 74950 Scionzier',
+  address: '74950 Scionzier',
   phone: '+33 6 81 94 90 21',
   email: 'antoine.scie@gmail.com',
 };
@@ -106,28 +106,7 @@ const totalHT = subtotal - discountAmount; // 900
 
 const PAYMENT = [
   { label: 'Acompte à la signature', pct: 40, amount: 360 },
-  { label: 'Validation des maquettes', pct: 30, amount: 270 },
-  { label: 'Livraison du site', pct: 30, amount: 270 },
-];
-
-const INCLUDED = [
-  '5 pages responsive (mobile · tablette · desktop)',
-  'Animations cinématiques fines au scroll',
-  'SEO technique + Schema.org Restaurant',
-  'Hébergement Vercel offert à vie',
-  'Déploiement sur le domaine existant',
-  'Garantie corrective 30 jours',
-  'Formation prise en main 30 min',
-];
-
-const NOT_INCLUDED = [
-  'Création / refonte du logo',
-  'Photographies professionnelles',
-  'Rédaction des textes (fournis par la cliente)',
-  'Maintenance évolutive (forfait sur devis)',
-  'Achat / renouvellement du nom de domaine',
-  'Catalogue détaillé de l\'épicerie (page produits e-commerce)',
-  'Création / suivi mensuel SEO local actif',
+  { label: 'Livraison du site', pct: 60, amount: 540 },
 ];
 
 const fmt = (n: number) =>
@@ -172,15 +151,6 @@ export default function DevisEtnaPage() {
           display: flex;
           flex-direction: column;
         }
-        .devis-shell::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background:
-            radial-gradient(ellipse 60% 40% at 100% 0%, rgba(232, 114, 26, 0.06) 0%, transparent 60%),
-            radial-gradient(ellipse 60% 40% at 0% 100%, rgba(232, 114, 26, 0.04) 0%, transparent 60%);
-          pointer-events: none;
-        }
         .devis-shell > * { position: relative; z-index: 1; }
         .label {
           font-size: 8.5px;
@@ -216,10 +186,10 @@ export default function DevisEtnaPage() {
           font-weight: 600;
         }
         .signature-box {
-          height: 56px;
-          border: 1px dashed rgba(255,255,255,0.18);
+          height: 64px;
+          border: 1px dashed rgba(255,255,255,0.22);
           border-radius: 6px;
-          background: rgba(255,255,255,0.015);
+          background: rgba(255,255,255,0.02);
         }
       `}</style>
 
@@ -307,22 +277,28 @@ export default function DevisEtnaPage() {
             </div>
           </section>
 
-          {/* ── Projet ── */}
+          {/* ── Projet (inline, compact) ── */}
           <section
             style={{
               borderTop: '1px solid rgba(255,255,255,0.08)',
               borderBottom: '1px solid rgba(255,255,255,0.08)',
-              padding: '8px 0',
-              marginBottom: 10,
+              padding: '7px 0',
+              marginBottom: 8,
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'baseline',
+              gap: 16,
             }}
           >
-            <div className="label" style={{ marginBottom: 4 }}>Projet</div>
-            <div className="serif" style={{ fontSize: 17, lineHeight: 1.2, color: '#FFFFFF', marginBottom: 3 }}>
-              Refonte du site internet de la Pizzeria L'Etna
+            <div>
+              <span className="label" style={{ marginRight: 8 }}>Projet</span>
+              <span className="serif" style={{ fontSize: 14, color: '#FFFFFF' }}>
+                Refonte du site internet de la Pizzeria L'Etna
+              </span>
             </div>
-            <p style={{ fontSize: 10, color: 'rgba(245,245,245,0.7)', lineHeight: 1.45, maxWidth: 620 }}>
-              Site vitrine moderne et 100 % responsive, déployé sur le domaine existant. Site simple, sans 3D ni intégrations e-commerce.
-            </p>
+            <span style={{ fontSize: 9, color: 'rgba(245,245,245,0.55)', whiteSpace: 'nowrap' }}>
+              Site vitrine, sans 3D ni e-commerce
+            </span>
           </section>
 
           {/* ── Tableau prestations ── */}
@@ -351,7 +327,7 @@ export default function DevisEtnaPage() {
                   display: 'grid',
                   gridTemplateColumns: '28px 1fr 40px 72px 82px',
                   gap: 10,
-                  padding: '5px 0',
+                  padding: '4px 0',
                   alignItems: 'flex-start',
                 }}
               >
@@ -430,65 +406,30 @@ export default function DevisEtnaPage() {
             </div>
           </section>
 
-          {/* ── Inclus / Non inclus ── */}
+          {/* ── Délai · Modalités · Acceptation, single compact row ── */}
           <section
             style={{
               display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: 24,
-              padding: '10px 0',
-              borderTop: '1px solid rgba(255,255,255,0.08)',
-              marginBottom: 10,
-            }}
-          >
-            <div>
-              <div className="label" style={{ marginBottom: 10 }}>Inclus dans la prestation</div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {INCLUDED.map((it, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 8, fontSize: 9.5, color: 'rgba(245,245,245,0.78)', lineHeight: 1.45, marginBottom: 3 }}>
-                    <span className="accent" style={{ flexShrink: 0 }}>✓</span>
-                    <span>{it}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <div className="label" style={{ marginBottom: 10 }}>Non inclus / hors périmètre</div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {NOT_INCLUDED.map((it, i) => (
-                  <li key={i} style={{ display: 'flex', gap: 8, fontSize: 9.5, color: 'rgba(245,245,245,0.55)', lineHeight: 1.45, marginBottom: 3 }}>
-                    <span style={{ flexShrink: 0, color: 'rgba(245,245,245,0.35)' }}>·</span>
-                    <span>{it}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </section>
-
-          {/* ── Délai & Modalités ── */}
-          <section
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1.4fr',
-              gap: 24,
-              padding: '10px 0',
+              gridTemplateColumns: '1fr 1.3fr 1fr 1fr',
+              gap: 16,
+              padding: '8px 0',
               borderTop: '1px solid rgba(255,255,255,0.08)',
               borderBottom: '1px solid rgba(255,255,255,0.08)',
-              marginBottom: 12,
+              marginBottom: 8,
             }}
           >
             <div>
-              <div className="label" style={{ marginBottom: 6 }}>Délai de livraison</div>
-              <div className="serif" style={{ fontSize: 16, color: '#FFFFFF', marginBottom: 4 }}>
+              <div className="label" style={{ marginBottom: 5 }}>Délai</div>
+              <div className="serif" style={{ fontSize: 14, color: '#FFFFFF', marginBottom: 3 }}>
                 {QUOTE.deliveryDays}
               </div>
-              <p style={{ fontSize: 9.5, color: 'rgba(245,245,245,0.55)', lineHeight: 1.45 }}>
-                À compter de la signature et de la réception complète des contenus (textes, photos, carte). Mise en ligne incluse.
+              <p style={{ fontSize: 8.5, color: 'rgba(245,245,245,0.55)', lineHeight: 1.4 }}>
+                Dès signature et réception des contenus.
               </p>
             </div>
             <div>
-              <div className="label" style={{ marginBottom: 6 }}>Modalités de paiement</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <div className="label" style={{ marginBottom: 5 }}>Modalités</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                 {PAYMENT.map((p, i) => (
                   <div
                     key={i}
@@ -496,74 +437,38 @@ export default function DevisEtnaPage() {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'baseline',
-                      padding: '3px 0',
-                      borderBottom: i < PAYMENT.length - 1 ? '1px dashed rgba(255,255,255,0.08)' : 'none',
-                      fontSize: 10.5,
+                      padding: '2px 0',
+                      fontSize: 9.5,
                     }}
                   >
                     <span style={{ color: 'rgba(245,245,245,0.75)' }}>
-                      <span className="num accent" style={{ marginRight: 8, fontWeight: 700 }}>{p.pct}%</span>
+                      <span className="num accent" style={{ marginRight: 6, fontWeight: 700 }}>{p.pct}%</span>
                       {p.label}
                     </span>
                     <span className="num" style={{ color: '#F5F5F5', fontWeight: 600 }}>{fmt(p.amount)}</span>
                   </div>
                 ))}
               </div>
-              <div style={{ marginTop: 6, fontSize: 9.5, color: 'rgba(245,245,245,0.5)', lineHeight: 1.45 }}>
-                Paiement par virement bancaire ou en espèces. RIB transmis avec la facture d'acompte. Délai de règlement : 7 jours à réception de chaque facture.
+              <div style={{ marginTop: 4, fontSize: 8, color: 'rgba(245,245,245,0.5)', lineHeight: 1.35 }}>
+                Virement ou espèces. Règlement à 7 jours.
               </div>
             </div>
-          </section>
-
-          {/* ── Acceptation ── */}
-          <section
-            style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: 24,
-              marginBottom: 10,
-            }}
-          >
             <div>
-              <div className="label" style={{ marginBottom: 5 }}>Pour cinematic.lab</div>
-              <div style={{ fontSize: 10.5, color: 'rgba(245,245,245,0.7)', lineHeight: 1.5, marginBottom: 6 }}>
-                Antoine SCIÉ
+              <div className="label" style={{ marginBottom: 5 }}>Antoine SCIÉ</div>
+              <div style={{ fontSize: 8.5, color: 'rgba(245,245,245,0.55)', marginBottom: 4 }}>
+                cinematic.lab
               </div>
               <div className="signature-box" />
             </div>
             <div>
-              <div className="label" style={{ marginBottom: 5 }}>
-                Bon pour accord, pour la Pizzeria L'Etna
-              </div>
-              <div style={{ fontSize: 9.5, color: 'rgba(245,245,245,0.55)', lineHeight: 1.45, marginBottom: 6 }}>
-                Date, lieu, signature précédée de la mention manuscrite « <strong style={{ color: '#F5F5F5' }}>Bon pour accord</strong> ».
+              <div className="label" style={{ marginBottom: 5 }}>Pizzeria L'Etna</div>
+              <div style={{ fontSize: 8.5, color: 'rgba(245,245,245,0.55)', marginBottom: 4, lineHeight: 1.35 }}>
+                « Bon pour accord », date, signature.
               </div>
               <div className="signature-box" />
             </div>
           </section>
 
-          {/* ── Footer mentions ── */}
-          <footer style={{ borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: 8, marginTop: 'auto' }}>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'flex-end',
-                gap: 16,
-                fontSize: 8.5,
-                color: 'rgba(245,245,245,0.45)',
-                lineHeight: 1.45,
-              }}
-            >
-              <div style={{ maxWidth: 420 }}>
-                Devis valable 30 jours à compter de sa date d'émission. Aucun escompte appliqué pour règlement anticipé. En cas de retard de paiement, pénalité de 3 fois le taux d'intérêt légal et indemnité forfaitaire de 40 € pour frais de recouvrement (art. L441-10 et D441-5 du Code de commerce).
-              </div>
-              <div style={{ textAlign: 'right' }}>
-                <div className="serif" style={{ color: '#FFFFFF', fontSize: 13 }}>cinematic.lab</div>
-                <div className="num">{FROM.phone} · {FROM.email}</div>
-              </div>
-            </div>
-          </footer>
         </article>
 
         <div className="devis-no-print" style={{ height: 32 }} />
