@@ -104,9 +104,9 @@ export default function PortfolioIndex() {
             aria-label="cinematic.lab — Antoine Scie"
           >
             <Logo
-              size={32}
-              gap={12}
-              wordmarkClassName="text-[20px] md:text-[22px] text-white"
+              size={34}
+              gap={11}
+              wordmarkClassName="text-[22px] md:text-[24px] text-white"
             />
           </a>
         </header>
@@ -167,7 +167,7 @@ function PortfolioFooter() {
           />
 
           <div className="relative z-10">
-            <Logo size={32} gap={12} wordmarkClassName="text-[20px] text-white" />
+            <Logo size={32} gap={11} wordmarkClassName="text-[22px] text-white" />
           </div>
 
           <div className="relative z-10">
