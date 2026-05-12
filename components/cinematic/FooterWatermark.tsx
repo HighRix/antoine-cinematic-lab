@@ -17,8 +17,9 @@ export function FooterWatermark() {
       } catch {}
     };
 
-    if (document.fonts && (document.fonts as { ready?: Promise<void> }).ready) {
-      (document.fonts as { ready: Promise<void> }).ready.then(fit);
+    const fonts = document.fonts as unknown as { ready?: Promise<void> };
+    if (fonts && fonts.ready) {
+      fonts.ready.then(fit);
     } else {
       window.addEventListener('load', fit);
     }
