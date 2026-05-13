@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { Lock } from 'lucide-react';
 import type { Prompt } from '@/data/prompts';
 
-type LabTier = {
+type LifetimeTier = {
   name: string;
   price: number;
   anchorPrice?: number;
@@ -16,7 +17,13 @@ type LabTier = {
 const PLACEHOLDER_PROMPT =
   '(prompt à renseigner — me ping si tu en as besoin maintenant, sinon je le reconstruis depuis le code en 30 min)';
 
-export function PromptDetail({ prompt, lab }: { prompt: Prompt; lab: LabTier }) {
+export function PromptDetail({
+  prompt,
+  lifetime,
+}: {
+  prompt: Prompt;
+  lifetime: LifetimeTier;
+}) {
   const [copied, setCopied] = useState(false);
 
   const fullPromptAvailable = prompt.promptText !== null && prompt.tier === 'free';
@@ -36,7 +43,10 @@ export function PromptDetail({ prompt, lab }: { prompt: Prompt; lab: LabTier }) 
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 pb-12">
       {/* Left : preview */}
       <div className="lg:col-span-7">
-        <div className="relative overflow-hidden rounded-2xl bg-[#141414] ring-1 ring-white/8" style={{ aspectRatio: '16 / 10' }}>
+        <div
+          className="relative overflow-hidden rounded-2xl bg-[#141414] ring-1 ring-white/8"
+          style={{ aspectRatio: '16 / 10' }}
+        >
           <video
             src={prompt.video}
             autoPlay
@@ -63,20 +73,23 @@ export function PromptDetail({ prompt, lab }: { prompt: Prompt; lab: LabTier }) 
       {/* Right : info + prompt */}
       <div className="lg:col-span-5 flex flex-col gap-7">
         <div>
-          <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center gap-2 mb-3">
             <span className="text-[10px] font-mono tracking-[0.24em] uppercase text-white/60">
               {prompt.number}
             </span>
-            <span
-              className={`text-[10px] tracking-[0.2em] uppercase font-mono px-2 py-1 rounded-full ${
-                prompt.tier === 'free'
-                  ? 'bg-[#F27D26]/15 text-[#F27D26] border border-[#F27D26]/40'
-                  : 'bg-white/5 text-white/55 border border-white/15'
-              }`}
-            >
-              {prompt.tier === 'free' ? 'Gratuit' : 'Premium'}
-            </span>
-            <span className="text-[10px] tracking-[0.18em] uppercase font-mono text-white/40">
+            <span className="text-white/20">·</span>
+            {prompt.tier === 'free' ? (
+              <span className="text-[10px] font-bold tracking-[0.18em] uppercase bg-[#F27D26] text-[#0C0C0C] px-2.5 py-1 rounded-full">
+                Gratuit
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1 text-[10px] font-medium tracking-[0.18em] uppercase text-white border border-white/25 px-2.5 py-1 rounded-full">
+                <Lock size={10} strokeWidth={2.2} />
+                Premium
+              </span>
+            )}
+            <span className="text-white/20">·</span>
+            <span className="text-[10px] tracking-[0.18em] uppercase font-mono text-white/45">
               {prompt.category}
             </span>
           </div>
@@ -104,7 +117,6 @@ export function PromptDetail({ prompt, lab }: { prompt: Prompt; lab: LabTier }) 
           </div>
         </div>
 
-        {/* Prompt content : either full (free) or teased (premium) */}
         <div>
           <div className="flex items-center justify-between mb-3">
             <p className="text-[11px] tracking-[0.22em] uppercase font-mono text-white/40">
@@ -134,19 +146,17 @@ export function PromptDetail({ prompt, lab }: { prompt: Prompt; lab: LabTier }) 
                 />
                 <div className="absolute bottom-5 left-5 right-5 flex flex-col gap-3">
                   <p className="text-white/70 text-sm">
-                    Texte complet du prompt + tous les futurs prompts pour {' '}
-                    <span className="text-white font-medium">€{lab.price}</span>
-                    {lab.anchorPrice && (
-                      <span className="text-white/35 line-through ml-2">€{lab.anchorPrice}</span>
+                    Toute la bibliothèque pour{' '}
+                    <span className="text-white font-medium">€{lifetime.price}</span>
+                    {lifetime.anchorPrice && (
+                      <span className="text-white/35 line-through ml-2">€{lifetime.anchorPrice}</span>
                     )}
                   </p>
                   <a
-                    href={lab.stanUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-[#F27D26] hover:bg-[#FF8A2E] text-black font-medium text-sm px-5 py-3 rounded-full shadow-[0_8px_24px_rgba(242,125,38,0.35)] transition-all hover:scale-[1.02] w-fit"
+                    href="/lab/pricing"
+                    className="inline-flex items-center justify-center gap-2 bg-[#F27D26] hover:bg-[#FF8A2E] text-[#0C0C0C] font-medium text-sm px-5 py-3 rounded-full shadow-[0_8px_24px_rgba(242,125,38,0.35)] transition-all hover:scale-[1.02] w-fit"
                   >
-                    Débloquer toute la bibliothèque
+                    Tout débloquer
                     <span aria-hidden>→</span>
                   </a>
                 </div>

@@ -183,61 +183,48 @@ export const PROMPTS: Prompt[] = [
 ];
 
 export const TIERS = {
-  starter: {
-    name: 'Starter',
-    price: 79,
-    description: '10 prompts au choix, accès lifetime',
+  monthly: {
+    name: 'Pro',
+    price: 27,
+    priceSuffix: '/mois',
+    description: 'Toute la bibliothèque, mois par mois',
     features: [
-      '10 prompts à choisir dans la bibliothèque',
-      'Mises à jour lifetime des prompts choisis',
-      'Licence usage personnel',
-      'Support email',
+      'Toute la bibliothèque actuelle',
+      'Tous les futurs prompts inclus',
+      'Licence usage personnel + 1 projet client',
+      'Annulable à tout moment',
     ],
-    cta: 'Choisir 10 prompts',
-    stanUrl: 'https://stan.store/your-handle/starter', // TODO: vraie URL Stan
+    cta: 'Commencer',
+    stanUrl: 'https://stan.store/your-handle/pro-monthly',
   },
-  lab: {
-    name: 'Lab Pass',
+  lifetime: {
+    name: 'Pro Lifetime',
     price: 199,
     anchorPrice: 399,
-    description: 'Toute la bibliothèque + tous les futurs prompts à vie',
+    description: 'Toute la bibliothèque, une seule fois',
     features: [
-      'Toute la bibliothèque actuelle (12+ prompts, 100+ visé)',
+      'Toute la bibliothèque actuelle',
       'Tous les futurs prompts inclus à vie',
-      'Mises à jour lifetime',
       'Licence usage personnel + 1 projet client',
-      'Support prioritaire',
+      'Achat unique, aucun renouvellement',
     ],
-    cta: 'Tout débloquer',
+    cta: 'Acheter à vie',
     badge: 'Le plus choisi',
-    stanUrl: 'https://stan.store/your-handle/lab-pass',
+    stanUrl: 'https://stan.store/your-handle/pro-lifetime',
   },
   agency: {
     name: 'Agency',
     price: 499,
-    description: 'Lab Pass + licence agence + Slack privé',
+    anchorPrice: 999,
+    description: 'Pour les studios et agences',
     features: [
-      'Tout le Lab Pass',
-      'Licence commerciale agence · sites client illimités',
+      'Tout Pro Lifetime',
+      'Licence commerciale · sites client illimités',
       'Accès Slack privé Lab membres',
       'Support prioritaire',
     ],
     cta: 'Passer en Agency',
     stanUrl: 'https://stan.store/your-handle/agency',
-  },
-  drop: {
-    name: 'Drop hebdo',
-    price: 19,
-    priceSuffix: '/mois',
-    description: '1 nouveau prompt premium par semaine, annulable',
-    features: [
-      '1 nouveau prompt premium chaque semaine',
-      'Accès maintenu tant que tu paies',
-      'Annulable à tout moment',
-      'Pas d\'archive (lifetime des prompts reçus uniquement)',
-    ],
-    cta: 'S\'abonner au Drop',
-    stripeUrl: 'https://buy.stripe.com/your-stripe-link', // TODO: vraie URL Stripe
   },
 } as const;
 
