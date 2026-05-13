@@ -66,49 +66,70 @@ const result = await page.evaluate(async () => {
   }
 
   // Step 2 — morphological closing (dilate then erode) to fill internal
-  // holes inside the car silhouette (wheels, dark shadows) without
-  // bloating the outer outline.
-  const R = 40;
-  const tmp = new Uint8Array(w * h);
-  // Dilate : any neighbor black -> this pixel black
+  // holes inside the car silhouette. Separable (horizontal pass then
+  // vertical pass) so a large radius is affordable. R=100 fills the big
+  // windshield + any other interior pocket.
+  const R = 100;
+  const a = binary;
+  const b = new Uint8Array(w * h);
+
+  // Horizontal dilate : a -> b
   for (let y = 0; y < h; y++) {
+    const row = y * w;
     for (let x = 0; x < w; x++) {
+      const x0 = Math.max(0, x - R);
+      const x1 = Math.min(w - 1, x + R);
       let black = false;
-      for (let dy = -R; dy <= R && !black; dy++) {
-        const ny = y + dy;
-        if (ny < 0 || ny >= h) continue;
-        for (let dx = -R; dx <= R; dx++) {
-          const nx = x + dx;
-          if (nx < 0 || nx >= w) continue;
-          if (binary[ny * w + nx] === 0) {
-            black = true;
-            break;
-          }
+      for (let i = x0; i <= x1; i++) {
+        if (a[row + i] === 0) {
+          black = true;
+          break;
         }
       }
-      tmp[y * w + x] = black ? 0 : 255;
+      b[row + x] = black ? 0 : 255;
     }
   }
-  // Erode : pixel stays black only if ALL neighbors black
+  // Vertical dilate : b -> a
+  for (let x = 0; x < w; x++) {
+    for (let y = 0; y < h; y++) {
+      const y0 = Math.max(0, y - R);
+      const y1 = Math.min(h - 1, y + R);
+      let black = false;
+      for (let i = y0; i <= y1; i++) {
+        if (b[i * w + x] === 0) {
+          black = true;
+          break;
+        }
+      }
+      a[y * w + x] = black ? 0 : 255;
+    }
+  }
+  // Horizontal erode : a -> b. Pixel stays black only if all neighbors black.
   for (let y = 0; y < h; y++) {
+    const row = y * w;
     for (let x = 0; x < w; x++) {
+      const x0 = Math.max(0, x - R);
+      const x1 = Math.min(w - 1, x + R);
       let allBlack = true;
-      for (let dy = -R; dy <= R && allBlack; dy++) {
-        const ny = y + dy;
-        if (ny < 0 || ny >= h) {
+      for (let i = x0; i <= x1; i++) {
+        if (a[row + i] !== 0) {
           allBlack = false;
           break;
         }
-        for (let dx = -R; dx <= R; dx++) {
-          const nx = x + dx;
-          if (nx < 0 || nx >= w) {
-            allBlack = false;
-            break;
-          }
-          if (tmp[ny * w + nx] !== 0) {
-            allBlack = false;
-            break;
-          }
+      }
+      b[row + x] = allBlack ? 0 : 255;
+    }
+  }
+  // Vertical erode : b -> binary (overwrite a)
+  for (let x = 0; x < w; x++) {
+    for (let y = 0; y < h; y++) {
+      const y0 = Math.max(0, y - R);
+      const y1 = Math.min(h - 1, y + R);
+      let allBlack = true;
+      for (let i = y0; i <= y1; i++) {
+        if (b[i * w + x] !== 0) {
+          allBlack = false;
+          break;
         }
       }
       binary[y * w + x] = allBlack ? 0 : 255;
