@@ -24,6 +24,7 @@ const SLUGS = [
   'zenith',
   'tanli',
   'weblex',
+  'new-era',
 ];
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

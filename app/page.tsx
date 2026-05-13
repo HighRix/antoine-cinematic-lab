@@ -11,6 +11,14 @@ export const metadata: Metadata = {
 
 const TEMPLATES: Project[] = [
   {
+    slug: '/new-era',
+    name: 'New Era',
+    tagline: 'Concession auto · vidéo plein écran + NEW ERA Bebas Neue gradient + dual-CTA bottom',
+    client: 'Concept marketplace automobile',
+    number: '12',
+    video: '/portfolio-previews/new-era.webm',
+  },
+  {
     slug: '/weblex',
     name: 'Weblex',
     tagline: 'Smart website builder · hero vidéo dark + boucle seamless RAF + accent lime',
