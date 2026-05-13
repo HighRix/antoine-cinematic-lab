@@ -125,7 +125,7 @@ export default function NewEraHero() {
               style={{
                 fontFamily: "'Bebas Neue', Impact, Haettenschweiler, sans-serif",
                 fontSize: 'clamp(96px, 22vw, 360px)',
-                letterSpacing: '-0.01em',
+                letterSpacing: '0.02em',
               }}
             >
               NEW ERA

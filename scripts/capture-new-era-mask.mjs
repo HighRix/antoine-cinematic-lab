@@ -65,75 +65,91 @@ const result = await page.evaluate(async () => {
     binary[p] = luma > LUMA_THRESHOLD || isOrange ? 0 : 255;
   }
 
-  // Step 2 — morphological closing (dilate then erode) to fill internal
-  // holes inside the car silhouette. Separable (horizontal pass then
-  // vertical pass) so a large radius is affordable. R=100 fills the big
-  // windshield + any other interior pocket.
-  const R = 100;
-  const a = binary;
-  const b = new Uint8Array(w * h);
+  // Step 2 — small separable closing (R=6) to remove threshold noise and
+  // bridge tiny gaps in the car outline, without filling large interior
+  // negative spaces.
+  const R = 6;
+  const tmp = new Uint8Array(w * h);
+  // H dilate
+  for (let y = 0; y < h; y++) {
+    const row = y * w;
+    for (let x = 0; x < w; x++) {
+      const x0 = Math.max(0, x - R);
+      const x1 = Math.min(w - 1, x + R);
+      let bk = false;
+      for (let i = x0; i <= x1; i++) if (binary[row + i] === 0) { bk = true; break; }
+      tmp[row + x] = bk ? 0 : 255;
+    }
+  }
+  // V dilate
+  for (let x = 0; x < w; x++) {
+    for (let y = 0; y < h; y++) {
+      const y0 = Math.max(0, y - R);
+      const y1 = Math.min(h - 1, y + R);
+      let bk = false;
+      for (let i = y0; i <= y1; i++) if (tmp[i * w + x] === 0) { bk = true; break; }
+      binary[y * w + x] = bk ? 0 : 255;
+    }
+  }
+  // H erode
+  for (let y = 0; y < h; y++) {
+    const row = y * w;
+    for (let x = 0; x < w; x++) {
+      const x0 = Math.max(0, x - R);
+      const x1 = Math.min(w - 1, x + R);
+      let all = true;
+      for (let i = x0; i <= x1; i++) if (binary[row + i] !== 0) { all = false; break; }
+      tmp[row + x] = all ? 0 : 255;
+    }
+  }
+  // V erode
+  for (let x = 0; x < w; x++) {
+    for (let y = 0; y < h; y++) {
+      const y0 = Math.max(0, y - R);
+      const y1 = Math.min(h - 1, y + R);
+      let all = true;
+      for (let i = y0; i <= y1; i++) if (tmp[i * w + x] !== 0) { all = false; break; }
+      binary[y * w + x] = all ? 0 : 255;
+    }
+  }
 
-  // Horizontal dilate : a -> b
-  for (let y = 0; y < h; y++) {
-    const row = y * w;
-    for (let x = 0; x < w; x++) {
-      const x0 = Math.max(0, x - R);
-      const x1 = Math.min(w - 1, x + R);
-      let black = false;
-      for (let i = x0; i <= x1; i++) {
-        if (a[row + i] === 0) {
-          black = true;
-          break;
-        }
-      }
-      b[row + x] = black ? 0 : 255;
+  // Step 3 — flood fill bg pixels from the image edges to identify the
+  // REAL background. Any white pixel reachable from any edge stays as
+  // background (text visible). Any white pixel NOT reachable (i.e. an
+  // ISOLATED hole inside the car silhouette like the windshield) gets
+  // filled with black (text hidden). This keeps the under-spoiler gap
+  // (which is connected to the sky from above/sides) transparent.
+  const visited = new Uint8Array(w * h);
+  const stack = new Int32Array(w * h);
+  let sp = 0;
+  const push = (idx) => {
+    if (binary[idx] === 255 && !visited[idx]) {
+      visited[idx] = 1;
+      stack[sp++] = idx;
     }
-  }
-  // Vertical dilate : b -> a
+  };
+  // Seed from all 4 edges
   for (let x = 0; x < w; x++) {
-    for (let y = 0; y < h; y++) {
-      const y0 = Math.max(0, y - R);
-      const y1 = Math.min(h - 1, y + R);
-      let black = false;
-      for (let i = y0; i <= y1; i++) {
-        if (b[i * w + x] === 0) {
-          black = true;
-          break;
-        }
-      }
-      a[y * w + x] = black ? 0 : 255;
-    }
+    push(x);
+    push((h - 1) * w + x);
   }
-  // Horizontal erode : a -> b. Pixel stays black only if all neighbors black.
   for (let y = 0; y < h; y++) {
-    const row = y * w;
-    for (let x = 0; x < w; x++) {
-      const x0 = Math.max(0, x - R);
-      const x1 = Math.min(w - 1, x + R);
-      let allBlack = true;
-      for (let i = x0; i <= x1; i++) {
-        if (a[row + i] !== 0) {
-          allBlack = false;
-          break;
-        }
-      }
-      b[row + x] = allBlack ? 0 : 255;
-    }
+    push(y * w);
+    push(y * w + w - 1);
   }
-  // Vertical erode : b -> binary (overwrite a)
-  for (let x = 0; x < w; x++) {
-    for (let y = 0; y < h; y++) {
-      const y0 = Math.max(0, y - R);
-      const y1 = Math.min(h - 1, y + R);
-      let allBlack = true;
-      for (let i = y0; i <= y1; i++) {
-        if (b[i * w + x] !== 0) {
-          allBlack = false;
-          break;
-        }
-      }
-      binary[y * w + x] = allBlack ? 0 : 255;
-    }
+  // BFS / DFS
+  while (sp > 0) {
+    const p = stack[--sp];
+    const y = (p / w) | 0;
+    const x = p - y * w;
+    if (x > 0) push(p - 1);
+    if (x < w - 1) push(p + 1);
+    if (y > 0) push(p - w);
+    if (y < h - 1) push(p + w);
+  }
+  // Any unvisited white pixel = interior hole -> fill black
+  for (let p = 0; p < w * h; p++) {
+    if (binary[p] === 255 && !visited[p]) binary[p] = 0;
   }
 
   // Write back to canvas
