@@ -151,10 +151,12 @@ export default function NewEraHero() {
           crossOrigin="anonymous"
           className="absolute inset-0 w-full h-full object-cover z-20 pointer-events-none"
           style={{
+            // Hard cut at the car's roofline (~28% from top). The 2px
+            // transition keeps the edge antialiased without leaking text.
             maskImage:
-              'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,1) 48%, rgba(0,0,0,1) 100%)',
+              'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 27%, rgba(0,0,0,1) 28%, rgba(0,0,0,1) 100%)',
             WebkitMaskImage:
-              'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,1) 48%, rgba(0,0,0,1) 100%)',
+              'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 27%, rgba(0,0,0,1) 28%, rgba(0,0,0,1) 100%)',
           }}
           aria-hidden
         />
