@@ -15,14 +15,24 @@ export default function LabIndex() {
       <LabHeader />
 
       <div className="max-w-[1600px] mx-auto px-5 sm:px-8 md:px-12 lg:px-16">
-        {/* Minimal hero */}
-        <section className="pt-10 md:pt-14 pb-10 md:pb-14">
-          <h1 className="font-serif italic text-[44px] md:text-[64px] lg:text-[76px] tracking-[-0.02em] leading-[1] text-white">
-            La bibliothèque.
-          </h1>
+        {/* Hero */}
+        <section className="pt-12 md:pt-16 pb-10 md:pb-14 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10">
+          <div className="md:col-span-8">
+            <h1 className="font-serif italic text-[44px] md:text-[64px] lg:text-[80px] tracking-[-0.02em] leading-[1] text-white">
+              Réveille tes super-pouvoirs<br />
+              <span className="text-[#F27D26]">de design AI.</span>
+            </h1>
+          </div>
+          <div className="md:col-span-4 flex items-end">
+            <p className="text-white/65 text-[15px] md:text-base leading-relaxed max-w-[400px]">
+              Des landing pages cinematic en quelques minutes avec notre bibliothèque
+              de prompts prêts à coller dans Lovable, Cursor ou Bolt. Copier, coller,
+              livrer.
+            </p>
+          </div>
         </section>
 
-        {/* Gallery (the main thing) */}
+        {/* Gallery */}
         <section className="pb-20 md:pb-28">
           <Gallery prompts={PROMPTS} />
         </section>

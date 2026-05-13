@@ -12,10 +12,21 @@ export type PromptCategory =
   | 'Local Business'
   | 'Component';
 
+export type PromptType =
+  | 'Hero section'
+  | 'Landing page'
+  | 'Footer'
+  | 'CTA section'
+  | 'Pricing section'
+  | 'Composant';
+
 export type Prompt = {
   slug: string;
   name: string;
   tagline: string;
+  /** Component type — drives the dropdown filter on /lab */
+  type: PromptType;
+  /** Industry / use case — secondary classification */
   category: PromptCategory;
   /** Path inside /public to the autoplay WebM preview */
   video: string;
@@ -38,6 +49,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'atlas',
     name: 'Atlas Studio',
     tagline: 'Studio créatif · WordsPullUp char-by-char + Instrument Serif italique',
+    type: 'Hero section',
     category: 'Agency',
     video: '/portfolio-previews/atlas.webm',
     livePreviewUrl: '/atlas',
@@ -50,6 +62,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'stratus',
     name: 'Stratus Agency',
     tagline: 'Agence digitale · liquid glass utility + HLS streaming + char reveal',
+    type: 'Hero section',
     category: 'Agency',
     video: '/portfolio-previews/stratus.webm',
     livePreviewUrl: '/stratus',
@@ -62,6 +75,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'jack',
     name: 'Jack 3D Creator',
     tagline: 'Portfolio 3D · marquee scroll + cards sticky-stack + magnet hover',
+    type: 'Hero section',
     category: 'Portfolio',
     video: '/portfolio-previews/jack.webm',
     livePreviewUrl: '/jack',
@@ -74,6 +88,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'grenier-bio',
     name: "Le Grenier Bio d'Emberbail",
     tagline: 'Ferme bio · hero vidéo doré + scène 3D produits + scroll terroir',
+    type: 'Hero section',
     category: 'Local Business',
     video: '/portfolio-previews/grenier-bio.webm',
     livePreviewUrl: '/grenier-bio',
@@ -86,6 +101,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'zenith',
     name: 'FT Design',
     tagline: 'Architecte résidentiel · scroll-driven blueprint + parallax projets',
+    type: 'Hero section',
     category: 'Agency',
     video: '/portfolio-previews/zenith.webm',
     livePreviewUrl: '/zenith',
@@ -100,6 +116,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'new-era',
     name: 'New Era',
     tagline: 'Concession auto · texte derrière la voiture via masque silhouette',
+    type: 'Hero section',
     category: 'E-commerce',
     video: '/portfolio-previews/new-era.webm',
     livePreviewUrl: '/new-era',
@@ -112,6 +129,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'weblex',
     name: 'Weblex',
     tagline: 'Smart website builder · vidéo background loop seamless via RAF',
+    type: 'Hero section',
     category: 'SaaS',
     video: '/portfolio-previews/weblex.webm',
     livePreviewUrl: '/weblex',
@@ -124,6 +142,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'automation-machines',
     name: 'Automation Machines',
     tagline: 'Landing futuriste · Spline 3D background + gradient Orbitron',
+    type: 'Hero section',
     category: 'SaaS',
     video: '/portfolio-previews/automation-machines.webm',
     livePreviewUrl: '/automation-machines',
@@ -136,6 +155,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'microvisuals',
     name: 'MicroVisuals',
     tagline: 'AI image tool · vidéo boomerang canvas + parallax GSAP + liquid glass',
+    type: 'Hero section',
     category: 'SaaS',
     video: '/portfolio-previews/microvisuals.webm',
     livePreviewUrl: '/microvisuals',
@@ -148,6 +168,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'pureflow',
     name: 'PureFlow One',
     tagline: 'Concept produit · spotlight reveal canvas + grille animée curseur',
+    type: 'Hero section',
     category: 'E-commerce',
     video: '/portfolio-previews/pureflow.webm',
     livePreviewUrl: '/pureflow',
@@ -160,6 +181,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'slam-dunk',
     name: 'Slam Dunk Store',
     tagline: 'E-commerce premium · ballon 3D photoréaliste + scroll narratif 6 actes',
+    type: 'Hero section',
     category: 'E-commerce',
     video: '/portfolio-previews/slam-dunk.webm',
     livePreviewUrl: '/slam-dunk',
@@ -172,6 +194,7 @@ export const PROMPTS: Prompt[] = [
     slug: 'orbis',
     name: 'Orbis.NFT',
     tagline: 'Landing NFT space · liquid glass + vidéos CloudFront sur planète',
+    type: 'Hero section',
     category: 'SaaS',
     video: '/portfolio-previews/orbis.webm',
     livePreviewUrl: '/orbis',

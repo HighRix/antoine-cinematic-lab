@@ -1,12 +1,18 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Link from 'next/link';
 import { Lock } from 'lucide-react';
 import type { Prompt } from '@/data/prompts';
 
-export function PromptCard({ prompt }: { prompt: Prompt }) {
-  const ref = useRef<HTMLAnchorElement>(null);
+type Props = {
+  prompt: Prompt;
+  /** Called when a premium card is clicked. Free cards navigate via Link. */
+  onPremiumClick?: () => void;
+};
+
+export function PromptCard({ prompt, onPremiumClick }: Props) {
+  const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -36,15 +42,10 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
   }, [inView]);
 
   const isFree = prompt.tier === 'free';
+  const ariaLabel = `${prompt.name} — ${prompt.tagline}`;
 
-  return (
-    <Link
-      ref={ref}
-      href={`/lab/${prompt.slug}`}
-      className="group relative block bg-[#0C0C0C] overflow-hidden focus:outline-none focus-visible:ring-1 focus-visible:ring-[#F27D26]"
-      style={{ aspectRatio: '16 / 10' }}
-      aria-label={`${prompt.name} — ${prompt.tagline}`}
-    >
+  const inner: ReactNode = (
+    <>
       {/* Video preview */}
       <div className="absolute inset-0 bg-[#0a0a0a]">
         {inView && (
@@ -62,7 +63,7 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
         )}
       </div>
 
-      {/* Tier badge — top-right, big and unmistakable */}
+      {/* Tier badge */}
       <div className="absolute top-4 right-4 z-20">
         {isFree ? (
           <span className="inline-flex items-center text-[11px] font-bold tracking-[0.18em] uppercase bg-[#F27D26] text-[#0C0C0C] px-3 py-1.5 rounded-full shadow-[0_4px_14px_rgba(242,125,38,0.45)]">
@@ -76,7 +77,7 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
         )}
       </div>
 
-      {/* Bottom info — always visible name */}
+      {/* Always visible name */}
       <div className="absolute inset-x-0 bottom-0 z-10 p-5 md:p-6">
         <div
           aria-hidden
@@ -92,7 +93,7 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
         </div>
       </div>
 
-      {/* Hover : extended tagline */}
+      {/* Hover extended tagline */}
       <div className="absolute inset-x-0 bottom-0 z-20 p-5 md:p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <div
           aria-hidden
@@ -119,6 +120,35 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
         className="absolute top-0 left-0 w-0 h-0 group-hover:w-[2px] group-hover:h-8 transition-all duration-500"
         style={{ background: '#F27D26' }}
       />
-    </Link>
+    </>
+  );
+
+  const sharedClass =
+    'group relative block w-full bg-[#0C0C0C] overflow-hidden focus:outline-none focus-visible:ring-1 focus-visible:ring-[#F27D26] text-left cursor-pointer';
+
+  // Wrapper for IntersectionObserver — keeps the type-discriminated Link vs button clean
+  return (
+    <div ref={ref} className="contents">
+      {isFree ? (
+        <Link
+          href={`/lab/${prompt.slug}`}
+          className={sharedClass}
+          style={{ aspectRatio: '16 / 10' }}
+          aria-label={ariaLabel}
+        >
+          {inner}
+        </Link>
+      ) : (
+        <button
+          type="button"
+          onClick={onPremiumClick}
+          className={sharedClass}
+          style={{ aspectRatio: '16 / 10' }}
+          aria-label={ariaLabel}
+        >
+          {inner}
+        </button>
+      )}
+    </div>
   );
 }
