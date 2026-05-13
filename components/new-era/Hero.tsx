@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X, ShoppingCart, ArrowRight } from 'lucide-react';
 
 const VIDEO_SRC =
@@ -40,6 +40,30 @@ function Pinwheel({ size = 28 }: { size?: number }) {
 
 export default function NewEraHero() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const bgVideoRef = useRef<HTMLVideoElement>(null);
+  const fgVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Keep the foreground (masked) video in sync with the background one
+  useEffect(() => {
+    const bg = bgVideoRef.current;
+    const fg = fgVideoRef.current;
+    if (!bg || !fg) return;
+    let rafId = 0;
+    const tick = () => {
+      if (
+        bg.readyState >= 2 &&
+        fg.readyState >= 2 &&
+        Math.abs(fg.currentTime - bg.currentTime) > 0.08
+      ) {
+        try {
+          fg.currentTime = bg.currentTime;
+        } catch {}
+      }
+      rafId = requestAnimationFrame(tick);
+    };
+    rafId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafId);
+  }, []);
 
   return (
     <>
@@ -63,8 +87,9 @@ export default function NewEraHero() {
         className="ne-root relative w-full overflow-hidden"
         style={{ background: '#010101', minHeight: '600px', height: '100vh', maxHeight: '965px' }}
       >
-        {/* Background video */}
+        {/* Background video (full) */}
         <video
+          ref={bgVideoRef}
           src={VIDEO_SRC}
           autoPlay
           muted
@@ -72,7 +97,7 @@ export default function NewEraHero() {
           playsInline
           preload="auto"
           crossOrigin="anonymous"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover z-0"
           aria-hidden
         />
 
@@ -96,9 +121,9 @@ export default function NewEraHero() {
           }}
         />
 
-        {/* Decorative NEW ERA text */}
+        {/* Decorative NEW ERA text — z-10, between bg video and car layer */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 z-20 pointer-events-none select-none"
+          className="absolute left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none"
           style={{ top: '15%', width: '75%', maxWidth: '1073px' }}
         >
           <h1
@@ -113,7 +138,28 @@ export default function NewEraHero() {
           </h1>
         </div>
 
-        {/* Top navbar */}
+        {/* Foreground video duplicate — masked to show only the bottom half
+            (the car body), so it appears in front of the NEW ERA text */}
+        <video
+          ref={fgVideoRef}
+          src={VIDEO_SRC}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          crossOrigin="anonymous"
+          className="absolute inset-0 w-full h-full object-cover z-20 pointer-events-none"
+          style={{
+            maskImage:
+              'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,1) 48%, rgba(0,0,0,1) 100%)',
+            WebkitMaskImage:
+              'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 32%, rgba(0,0,0,1) 48%, rgba(0,0,0,1) 100%)',
+          }}
+          aria-hidden
+        />
+
+        {/* Top navbar — z-30 to stay above the foreground video */}
         <nav
           className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between"
           style={{ paddingLeft: 'clamp(20px, 5vw, 80px)', paddingRight: 'clamp(20px, 5vw, 80px)', paddingTop: '28px', paddingBottom: '28px' }}
@@ -188,16 +234,16 @@ export default function NewEraHero() {
           </div>
         )}
 
-        {/* Bottom CTA */}
+        {/* Bottom CTA — z-30 above foreground video */}
         <div
-          className="absolute bottom-0 left-0 right-0 z-20 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 lg:gap-12"
+          className="absolute bottom-0 left-0 right-0 z-30 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 lg:gap-12"
           style={{
             paddingLeft: 'clamp(20px, 5vw, 80px)',
             paddingRight: 'clamp(20px, 5vw, 80px)',
             paddingBottom: 'clamp(32px, 5vh, 56px)',
           }}
         >
-          <div className="flex flex-col sm:flex-row items-start sm:items-end gap-6 lg:gap-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 lg:gap-8">
             <p
               className="text-white text-[18px] sm:text-[20px] leading-[30px] max-w-[414px]"
             >
