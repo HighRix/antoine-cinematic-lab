@@ -96,9 +96,9 @@ export default function NewEraHero() {
           }}
         />
 
-        {/* Decorative NEW ERA text — sits above the video, cropped at the
-            car's roofline by mask-image so only the upper portion shows.
-            One element, one mask. */}
+        {/* Decorative NEW ERA text per spec : vertical gradient white 83%
+            top -> white 12% bottom. The bottom of the text is intrinsically
+            near-transparent so it dissolves into the bright car body below. */}
         <div
           className="absolute left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none"
           style={{ top: '15%', width: '75%', maxWidth: '1073px' }}
@@ -109,10 +109,6 @@ export default function NewEraHero() {
               fontFamily: "'Bebas Neue', Impact, Haettenschweiler, sans-serif",
               fontSize: 'clamp(96px, 22vw, 360px)',
               letterSpacing: '-0.01em',
-              maskImage:
-                'linear-gradient(180deg, black 0%, black 38%, transparent 42%, transparent 100%)',
-              WebkitMaskImage:
-                'linear-gradient(180deg, black 0%, black 38%, transparent 42%, transparent 100%)',
             }}
           >
             NEW ERA
