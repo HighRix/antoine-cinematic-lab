@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Menu, X, ShoppingCart, ArrowRight } from 'lucide-react';
 
 const VIDEO_SRC =
@@ -40,30 +40,6 @@ function Pinwheel({ size = 28 }: { size?: number }) {
 
 export default function NewEraHero() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const bgVideoRef = useRef<HTMLVideoElement>(null);
-  const fgVideoRef = useRef<HTMLVideoElement>(null);
-
-  // Keep the foreground (masked) video in sync with the background one
-  useEffect(() => {
-    const bg = bgVideoRef.current;
-    const fg = fgVideoRef.current;
-    if (!bg || !fg) return;
-    let rafId = 0;
-    const tick = () => {
-      if (
-        bg.readyState >= 2 &&
-        fg.readyState >= 2 &&
-        Math.abs(fg.currentTime - bg.currentTime) > 0.08
-      ) {
-        try {
-          fg.currentTime = bg.currentTime;
-        } catch {}
-      }
-      rafId = requestAnimationFrame(tick);
-    };
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }, []);
 
   return (
     <>
@@ -87,9 +63,8 @@ export default function NewEraHero() {
         className="ne-root relative w-full overflow-hidden"
         style={{ background: '#010101', minHeight: '600px', height: '100vh', maxHeight: '965px' }}
       >
-        {/* Background video (full) */}
+        {/* Background video */}
         <video
-          ref={bgVideoRef}
           src={VIDEO_SRC}
           autoPlay
           muted
@@ -121,7 +96,9 @@ export default function NewEraHero() {
           }}
         />
 
-        {/* Decorative NEW ERA text — z-10, between bg video and car layer */}
+        {/* Decorative NEW ERA text — sits above the video, cropped at the
+            car's roofline by mask-image so only the upper portion shows.
+            One element, one mask. */}
         <div
           className="absolute left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none"
           style={{ top: '15%', width: '75%', maxWidth: '1073px' }}
@@ -132,34 +109,15 @@ export default function NewEraHero() {
               fontFamily: "'Bebas Neue', Impact, Haettenschweiler, sans-serif",
               fontSize: 'clamp(96px, 22vw, 360px)',
               letterSpacing: '-0.01em',
+              maskImage:
+                'linear-gradient(180deg, black 0%, black 38%, transparent 42%, transparent 100%)',
+              WebkitMaskImage:
+                'linear-gradient(180deg, black 0%, black 38%, transparent 42%, transparent 100%)',
             }}
           >
             NEW ERA
           </h1>
         </div>
-
-        {/* Foreground video duplicate — masked to show only the bottom half
-            (the car body), so it appears in front of the NEW ERA text */}
-        <video
-          ref={fgVideoRef}
-          src={VIDEO_SRC}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          crossOrigin="anonymous"
-          className="absolute inset-0 w-full h-full object-cover z-20 pointer-events-none"
-          style={{
-            // Hard cut at the car's roofline (~28% from top). The 2px
-            // transition keeps the edge antialiased without leaking text.
-            maskImage:
-              'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 27%, rgba(0,0,0,1) 28%, rgba(0,0,0,1) 100%)',
-            WebkitMaskImage:
-              'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 27%, rgba(0,0,0,1) 28%, rgba(0,0,0,1) 100%)',
-          }}
-          aria-hidden
-        />
 
         {/* Top navbar — z-30 to stay above the foreground video */}
         <nav
