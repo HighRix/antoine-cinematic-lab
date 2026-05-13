@@ -48,7 +48,11 @@ export default function NewEraHero() {
         .ne-inter { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
         .ne-bebas { font-family: 'Bebas Neue', 'Impact', sans-serif; }
         .ne-gradient-text {
-          background: linear-gradient(180deg, rgba(255,255,255,0.83) 0%, rgba(255,255,255,0.12) 100%);
+          background: linear-gradient(180deg,
+            rgba(255,255,255,0.83) 0%,
+            rgba(255,255,255,0.55) 35%,
+            rgba(255,255,255,0) 55%,
+            rgba(255,255,255,0) 100%);
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
