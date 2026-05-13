@@ -68,7 +68,7 @@ const result = await page.evaluate(async () => {
   // Step 2 — morphological closing (dilate then erode) to fill internal
   // holes inside the car silhouette (wheels, dark shadows) without
   // bloating the outer outline.
-  const R = 12;
+  const R = 40;
   const tmp = new Uint8Array(w * h);
   // Dilate : any neighbor black -> this pixel black
   for (let y = 0; y < h; y++) {
