@@ -48,15 +48,76 @@ const result = await page.evaluate(async () => {
     return { error: 'getImageData (CORS taint?): ' + (e instanceof Error ? e.message : String(e)) };
   }
 
-  // Compute luminance per pixel, threshold to binary :
-  //   bright source pixel (car body) -> BLACK output (hides text)
-  //   dark source pixel (background) -> WHITE output (shows text)
-  // Threshold tuned to the bright orange car body vs the dark surroundings.
+  // Step 1 — binary threshold : bright pixel (car) -> 0 (black, hide text),
+  // dark pixel (bg) -> 255 (white, show text). Also count orange-dominant
+  // pixels so dark car interior (wheel arches, shadows) still register.
+  const w = canvas.width;
+  const h = canvas.height;
   const d = imgData.data;
-  const THRESHOLD = 70;
-  for (let i = 0; i < d.length; i += 4) {
-    const luma = 0.299 * d[i] + 0.587 * d[i + 1] + 0.114 * d[i + 2];
-    const v = luma > THRESHOLD ? 0 : 255;
+  const LUMA_THRESHOLD = 55;
+  const binary = new Uint8Array(w * h);
+  for (let i = 0, p = 0; i < d.length; i += 4, p++) {
+    const r = d[i],
+      g = d[i + 1],
+      b = d[i + 2];
+    const luma = 0.299 * r + 0.587 * g + 0.114 * b;
+    const isOrange = r > 50 && r > g + 5 && r > b + 15;
+    binary[p] = luma > LUMA_THRESHOLD || isOrange ? 0 : 255;
+  }
+
+  // Step 2 — morphological closing (dilate then erode) to fill internal
+  // holes inside the car silhouette (wheels, dark shadows) without
+  // bloating the outer outline.
+  const R = 12;
+  const tmp = new Uint8Array(w * h);
+  // Dilate : any neighbor black -> this pixel black
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      let black = false;
+      for (let dy = -R; dy <= R && !black; dy++) {
+        const ny = y + dy;
+        if (ny < 0 || ny >= h) continue;
+        for (let dx = -R; dx <= R; dx++) {
+          const nx = x + dx;
+          if (nx < 0 || nx >= w) continue;
+          if (binary[ny * w + nx] === 0) {
+            black = true;
+            break;
+          }
+        }
+      }
+      tmp[y * w + x] = black ? 0 : 255;
+    }
+  }
+  // Erode : pixel stays black only if ALL neighbors black
+  for (let y = 0; y < h; y++) {
+    for (let x = 0; x < w; x++) {
+      let allBlack = true;
+      for (let dy = -R; dy <= R && allBlack; dy++) {
+        const ny = y + dy;
+        if (ny < 0 || ny >= h) {
+          allBlack = false;
+          break;
+        }
+        for (let dx = -R; dx <= R; dx++) {
+          const nx = x + dx;
+          if (nx < 0 || nx >= w) {
+            allBlack = false;
+            break;
+          }
+          if (tmp[ny * w + nx] !== 0) {
+            allBlack = false;
+            break;
+          }
+        }
+      }
+      binary[y * w + x] = allBlack ? 0 : 255;
+    }
+  }
+
+  // Write back to canvas
+  for (let p = 0, i = 0; p < binary.length; p++, i += 4) {
+    const v = binary[p];
     d[i] = v;
     d[i + 1] = v;
     d[i + 2] = v;
