@@ -48,11 +48,7 @@ export default function NewEraHero() {
         .ne-inter { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
         .ne-bebas { font-family: 'Bebas Neue', 'Impact', sans-serif; }
         .ne-gradient-text {
-          background: linear-gradient(180deg,
-            rgba(255,255,255,0.83) 0%,
-            rgba(255,255,255,0.55) 35%,
-            rgba(255,255,255,0) 55%,
-            rgba(255,255,255,0) 100%);
+          background: linear-gradient(180deg, rgba(255,255,255,0.83) 0%, rgba(255,255,255,0.12) 100%);
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
@@ -100,23 +96,41 @@ export default function NewEraHero() {
           }}
         />
 
-        {/* Decorative NEW ERA text per spec : vertical gradient white 83%
-            top -> white 12% bottom. The bottom of the text is intrinsically
-            near-transparent so it dissolves into the bright car body below. */}
+        {/* Car-shape mask wrapper. The PNG was captured from this exact
+            video and inverted (car -> dark, bg -> bright). With
+            mask-mode:luminance, only the bright (off-car) regions reveal
+            the text. The text therefore appears AROUND the car silhouette
+            and is invisible BEHIND it. Same `cover` positioning as the
+            video so the mask aligns pixel-for-pixel. */}
         <div
-          className="absolute left-1/2 -translate-x-1/2 z-10 pointer-events-none select-none"
-          style={{ top: '15%', width: '75%', maxWidth: '1073px' }}
+          className="absolute inset-0 z-10 pointer-events-none select-none"
+          style={{
+            maskImage: 'url(/new-era-mask.png)',
+            maskMode: 'luminance',
+            maskSize: 'cover',
+            maskPosition: 'center',
+            maskRepeat: 'no-repeat',
+            WebkitMaskImage: 'url(/new-era-mask.png)',
+            WebkitMaskSize: 'cover',
+            WebkitMaskPosition: 'center',
+            WebkitMaskRepeat: 'no-repeat',
+          }}
         >
-          <h1
-            className="ne-gradient-text leading-none text-center font-bold"
-            style={{
-              fontFamily: "'Bebas Neue', Impact, Haettenschweiler, sans-serif",
-              fontSize: 'clamp(96px, 22vw, 360px)',
-              letterSpacing: '-0.01em',
-            }}
+          <div
+            className="absolute left-1/2 -translate-x-1/2"
+            style={{ top: '15%', width: '75%', maxWidth: '1073px' }}
           >
-            NEW ERA
-          </h1>
+            <h1
+              className="ne-gradient-text leading-none text-center font-bold"
+              style={{
+                fontFamily: "'Bebas Neue', Impact, Haettenschweiler, sans-serif",
+                fontSize: 'clamp(96px, 22vw, 360px)',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              NEW ERA
+            </h1>
+          </div>
         </div>
 
         {/* Top navbar — z-30 to stay above the foreground video */}
