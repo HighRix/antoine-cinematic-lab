@@ -19,16 +19,19 @@ export function ProjectCard({ project, index, total }: { project: Project; index
   const videoRef = useRef<HTMLVideoElement>(null);
   const [inView, setInView] = useState(false);
 
+  // Charge la vidéo à l'approche de la carte, puis la met en pause quand elle sort
+  // de l'écran (35 vidéos qui tournent en même temps saturent le CPU).
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
-          if (e.isIntersecting) {
-            setInView(true);
-            io.disconnect();
-          }
+          if (e.isIntersecting) setInView(true);
+          const v = videoRef.current;
+          if (!v) continue;
+          if (e.isIntersecting) v.play().catch(() => {});
+          else v.pause();
         }
       },
       { rootMargin: '300px 0px', threshold: 0 }
@@ -36,13 +39,6 @@ export function ProjectCard({ project, index, total }: { project: Project; index
     io.observe(el);
     return () => io.disconnect();
   }, []);
-
-  useEffect(() => {
-    if (!inView) return;
-    const v = videoRef.current;
-    if (!v) return;
-    v.play().catch(() => {});
-  }, [inView]);
 
   return (
     <Link
