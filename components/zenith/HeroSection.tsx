@@ -1,9 +1,10 @@
 'use client';
 import { motion } from 'framer-motion';
 import { Navbar } from './Navbar';
+import { ASSETS_BASE } from '@/lib/assets';
 
 const HERO_VIDEO =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260503_144509_89e2d612-8af2-45c3-90f4-4831bc60715d.mp4';
+  `${ASSETS_BASE}/zenith/asset-98725977.mp4`;
 
 export function HeroSection() {
   return (

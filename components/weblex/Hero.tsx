@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ASSETS_BASE } from '@/lib/assets';
 
 const VIDEO_SRC =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260221_085953_8463b46e-ba85-4bb7-912a-1feaf346e970.mp4';
+  `${ASSETS_BASE}/weblex/asset-56eb5169.mp4`;
 
 const NAV = ['Home', 'Features', 'Pricing', 'About'];
 

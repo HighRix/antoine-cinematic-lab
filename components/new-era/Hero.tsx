@@ -2,9 +2,10 @@
 
 import { useState } from 'react';
 import { Menu, X, ShoppingCart, ArrowRight } from 'lucide-react';
+import { ASSETS_BASE } from '@/lib/assets';
 
 const VIDEO_SRC =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260213_051817_c7d8ccc6-bfaa-417c-8474-e5cefeea26b4.mp4';
+  `${ASSETS_BASE}/new-era/asset-8b96c679.mp4`;
 
 const NAV = ['Home', 'Shop', 'Blog', 'About Us', 'Contact Us'];
 

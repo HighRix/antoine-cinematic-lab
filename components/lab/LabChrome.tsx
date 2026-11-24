@@ -1,4 +1,5 @@
 import { Logo } from '@/components/cinematic/Logo';
+import { NavAuthButton } from '@/components/lab/NavAuthButton';
 
 export function LabHeader() {
   return (
@@ -15,14 +16,12 @@ export function LabHeader() {
           <a href="/lab/contact" className="text-white/65 hover:text-white transition-colors">
             Contact
           </a>
-          <a href="/" className="hidden sm:inline-flex text-white/65 hover:text-white transition-colors">
-            Portfolio
-          </a>
+          <NavAuthButton />
           <a
             href="/lab/pricing"
             className="inline-flex items-center bg-[#F27D26] hover:bg-[#FF8A2E] text-[#0C0C0C] text-[13px] font-medium px-4 py-1.5 rounded-full transition-colors"
           >
-            Tout débloquer
+            Mode illimité
           </a>
         </nav>
       </div>
@@ -42,20 +41,9 @@ export function LabFooter() {
           <a href="/lab/contact" className="hover:text-white transition-colors">
             Contact
           </a>
-          <a href="/" className="hover:text-white transition-colors">
-            Portfolio
-          </a>
-          <a
-            href="https://www.linkedin.com/in/antoinescie/"
-            target="_blank"
-            rel="noreferrer"
-            className="hover:text-white transition-colors"
-          >
-            LinkedIn
-          </a>
         </div>
         <span className="text-[10px] tracking-[0.22em] uppercase font-mono text-white/30">
-          © 2026 antoine scie
+          © 2026 cinematic lab
         </span>
       </div>
     </footer>

@@ -1,13 +1,15 @@
 import type { Metadata } from 'next';
 import { Check } from 'lucide-react';
+import { Suspense } from 'react';
 import { LabHeader, LabFooter } from '@/components/lab/LabChrome';
-import { BoomerangVideoBg } from '@/components/lab/BoomerangVideoBg';
+import { CheckoutButton } from '@/components/lab/CheckoutButton';
+import { PricingCancelledBanner } from '@/components/lab/PricingCancelledBanner';
 import { TIERS } from '@/data/prompts';
 
 export const metadata: Metadata = {
-  title: 'Pricing · cinematic.lab',
+  title: 'Tarifs · cinematic.lab',
   description:
-    'Toute la bibliothèque pour €27/mois ou €199 lifetime. €499 lifetime pour les agences.',
+    'Toute la bibliothèque pour 27€/mois ou 199€ à vie. 499€ à vie pour les agences. Tous les futurs prompts inclus.',
 };
 
 const ORDER = ['monthly', 'lifetime', 'agency'] as const;
@@ -15,215 +17,195 @@ const ORDER = ['monthly', 'lifetime', 'agency'] as const;
 const FAQ: { q: string; a: string }[] = [
   {
     q: 'Les prompts marchent sur quel outil ?',
-    a: 'Tous les prompts sont testés sur Lovable, Cursor, Bolt et Claude Code. Le rendu visuel est le même, le code généré varie un peu selon l\'outil mais reste sain.',
+    a: "Tous les générateurs IA : Lovable, Cursor, Bolt, Claude Code, Google AI Studio, Kimi, v0, Replit Agent. Le rendu visuel est identique, seul le code généré varie légèrement selon l'outil.",
   },
   {
     q: 'Quelle différence entre Pro mensuel et Pro Lifetime ?',
-    a: 'Le contenu est identique : toute la bibliothèque + tous les futurs prompts. Mensuel = €27 tu paies tant que tu utilises. Lifetime = €199 une seule fois, accès à vie même si tu n\'utilises plus pendant un an.',
+    a: "Le contenu est identique : toute la bibliothèque et tous les futurs prompts. Mensuel à 27€ tant que tu l'utilises. Lifetime à 199€ une fois pour toutes.",
   },
   {
     q: 'Je peux passer du mensuel au Lifetime ?',
-    a: 'Oui, à tout moment. Le montant déjà versé sur les 6 derniers mois est déduit du Lifetime. Tu paies juste la différence.',
+    a: "Oui, à tout moment. Le montant déjà versé sur les 6 derniers mois est déduit du Lifetime. Tu paies juste la différence.",
   },
   {
     q: 'Combien de nouveaux prompts par mois ?',
-    a: 'Entre 4 et 6 nouveaux prompts publiés chaque mois. Tous inclus dans Pro et Pro Lifetime, à vie.',
+    a: 'De nouveaux prompts ajoutés tous les jours. Tous inclus dans Pro et Pro Lifetime, à vie.',
   },
   {
     q: 'Je peux utiliser un prompt pour un site client ?',
-    a: 'Avec Pro (mensuel ou lifetime) : oui sur 1 projet client à la fois. Pour des projets client illimités, c\'est le tier Agency.',
-  },
-  {
-    q: 'Remboursement possible ?',
-    a: 'Pas une fois la bibliothèque téléchargée (c\'est du digital sans retour possible). C\'est pour ça que 5 prompts sont visibles entièrement avant achat — tu juges la qualité avant de payer.',
+    a: "Avec Pro (mensuel ou Lifetime) : oui sur 1 projet client à la fois. Pour des projets clients illimités, c'est le tier Agency.",
   },
 ];
 
 export default function LabPricingPage() {
   return (
-    <main className="relative min-h-screen text-[#F5F5F5] antialiased overflow-x-hidden">
-      <BoomerangVideoBg />
-
-      {/* Soft darkening overlay so content reads above the video */}
+    <main className="relative min-h-screen bg-[#0C0C0C] text-[#F5F5F5] antialiased overflow-x-hidden">
+      {/* Ambient orange glow — anchored top, soft, non-distracting */}
       <div
         aria-hidden
-        className="fixed inset-0 -z-[5] pointer-events-none"
+        className="pointer-events-none fixed inset-x-0 top-0 -z-[5] h-[60vh] opacity-60"
         style={{
           background:
-            'radial-gradient(ellipse at center, rgba(12,12,12,0.55) 0%, rgba(12,12,12,0.78) 60%, rgba(12,12,12,0.92) 100%)',
+            'radial-gradient(ellipse 60% 50% at 50% 0%, rgba(242,125,38,0.18) 0%, rgba(242,125,38,0.06) 30%, transparent 70%)',
         }}
       />
 
       <LabHeader />
 
-      {/* Inline SVG noise filter referenced by the watermark */}
-      <svg aria-hidden width="0" height="0" className="absolute">
-        <filter id="lab-noise">
-          <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" />
-          <feComponentTransfer>
-            <feFuncA type="linear" slope="0.075" />
-          </feComponentTransfer>
-          <feComposite in2="SourceGraphic" operator="in" />
-          <feBlend in="SourceGraphic" mode="overlay" />
-        </filter>
-      </svg>
+      <Suspense fallback={null}>
+        <PricingCancelledBanner />
+      </Suspense>
 
-      <div className="relative max-w-[1600px] mx-auto px-5 sm:px-8 md:px-12 lg:px-16">
-        {/* Watermark */}
-        <section className="pt-16 md:pt-24 pb-10 text-center">
-          <p className="font-serif italic text-[22px] md:text-[28px] text-white/85 tracking-[-0.01em]">
-            cinematic<span className="text-[#F27D26]">.</span>lab
+      <div className="relative max-w-[1200px] mx-auto px-5 sm:px-8 md:px-12 lg:px-16">
+        {/* Hero */}
+        <section className="pt-20 md:pt-28 pb-12 md:pb-16 text-center">
+          <p className="text-[11px] font-mono tracking-[0.32em] uppercase text-[#F27D26] mb-6">
+            Tarifs
           </p>
-          <h1
-            className="font-serif italic font-extrabold mt-2 md:-mt-3 lg:-mt-6 leading-[0.9] tracking-[-0.04em] bg-clip-text text-transparent"
-            style={{
-              fontSize: 'clamp(96px, 18vw, 256px)',
-              backgroundImage:
-                'linear-gradient(120deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.55) 35%, #F27D26 75%, #FFB070 100%)',
-              filter: 'url(#lab-noise)',
-            }}
-          >
-            Pricing
+          <h1 className="font-serif italic text-[44px] md:text-[68px] lg:text-[80px] tracking-[-0.025em] leading-[0.95] text-white">
+            Un seul paiement.<br />
+            <span className="text-[#F27D26]">Tout, à vie.</span>
           </h1>
-          <p className="mt-6 text-white/70 text-base md:text-lg leading-relaxed max-w-[560px] mx-auto">
-            Toute la bibliothèque, tous les futurs prompts. Mensuel ou lifetime, à toi de choisir.
+          <p className="mt-8 text-white/65 text-[16px] md:text-[17px] leading-relaxed max-w-[540px] mx-auto">
+            Toute la bibliothèque, tous les futurs prompts. Choisis ta formule, accède à vie.
           </p>
         </section>
 
-        {/* Cards */}
-        <section className="pb-20 md:pb-28">
-          <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+        {/* Pricing cards */}
+        <section className="pb-16 md:pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 items-stretch">
             {ORDER.map((key) => {
               const tier = TIERS[key];
-              const isFeatured = key === 'lifetime';
+              const featured = key === 'lifetime';
               const hasBadge = 'badge' in tier && tier.badge;
+              const anchor = 'anchorPrice' in tier ? tier.anchorPrice : undefined;
+              const suffix = 'priceSuffix' in tier ? tier.priceSuffix : undefined;
 
               return (
                 <div
                   key={key}
-                  className={`relative p-7 md:p-9 flex flex-col gap-7 min-h-[540px] transition-all duration-500 hover:-translate-y-2 hover:scale-[1.005] ${
-                    isFeatured ? 'lab-glass-featured' : 'lab-glass'
-                  }`}
-                  style={{
-                    borderRadius: 36,
-                  }}
+                  className={[
+                    'relative flex flex-col rounded-3xl p-7 md:p-9 transition-all duration-500 hover:-translate-y-1',
+                    featured
+                      ? 'bg-[#141414] ring-2 ring-[#F27D26]/55 shadow-[0_24px_70px_rgba(242,125,38,0.18)] md:scale-[1.025]'
+                      : 'bg-[#141414] ring-1 ring-white/10 hover:ring-white/20',
+                  ].join(' ')}
                 >
                   {hasBadge && (
-                    <span className="absolute -top-3 left-7 inline-flex items-center text-[10px] font-bold tracking-[0.22em] uppercase font-mono bg-[#F27D26] text-[#0C0C0C] px-3 py-1.5 rounded-full z-10">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 inline-flex items-center text-[10px] font-bold tracking-[0.22em] uppercase font-mono bg-[#F27D26] text-[#0C0C0C] px-3.5 py-1.5 rounded-full whitespace-nowrap">
                       {tier.badge}
                     </span>
                   )}
 
-                  <div className="relative">
-                    <p className="text-[12px] tracking-[0.22em] uppercase font-mono text-white/55">
+                  {/* Header */}
+                  <div className="pb-7 mb-7 border-b border-white/8">
+                    <p className="text-[11px] font-mono tracking-[0.24em] uppercase text-white/50">
                       {tier.name}
                     </p>
-                    <div className="mt-4 flex items-baseline gap-2 flex-wrap">
-                      {'anchorPrice' in tier && tier.anchorPrice && (
-                        <span className="text-white/35 text-xl line-through font-serif italic">
-                          €{tier.anchorPrice}
+                    <div className="mt-5 flex items-baseline gap-2 flex-wrap">
+                      {anchor && (
+                        <span className="text-white/30 text-xl line-through font-serif italic">
+                          {anchor}€
                         </span>
                       )}
-                      <span className="font-serif italic text-[48px] md:text-[56px] text-white tracking-[-0.02em] leading-none">
-                        €{tier.price}
+                      <span className="font-serif italic text-[56px] md:text-[64px] text-white tracking-[-0.025em] leading-none">
+                        {tier.price}€
                       </span>
-                      {'priceSuffix' in tier && tier.priceSuffix && (
-                        <span className="text-white/65 text-sm">{tier.priceSuffix}</span>
+                      {suffix && (
+                        <span className="text-white/55 text-sm">{suffix}</span>
                       )}
                     </div>
-                    <p className="mt-4 text-white/65 text-[14px] leading-relaxed min-h-[48px]">
+                    <p className="mt-5 text-white/65 text-[14px] leading-relaxed">
                       {tier.description}
                     </p>
                   </div>
 
-                  <ul className="flex flex-col gap-3.5 flex-1 relative">
+                  {/* Features */}
+                  <ul className="flex flex-col gap-3.5 flex-1">
                     {tier.features.map((f) => (
                       <li
                         key={f}
-                        className="flex items-start gap-3 text-[13px] text-white/85 leading-relaxed"
+                        className="flex items-start gap-3 text-[14px] text-white/85 leading-[1.55]"
                       >
                         <span
-                          className="mt-0.5 inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/12 shrink-0"
+                          className={[
+                            'mt-[3px] inline-flex items-center justify-center w-[18px] h-[18px] rounded-full shrink-0',
+                            featured ? 'bg-[#F27D26]/15' : 'bg-white/10',
+                          ].join(' ')}
                           aria-hidden
                         >
-                          <Check size={13} strokeWidth={3} className="text-white" />
+                          <Check
+                            size={11}
+                            strokeWidth={3}
+                            className={featured ? 'text-[#F27D26]' : 'text-white/80'}
+                          />
                         </span>
                         <span>{f}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <a
-                    href={tier.stanUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className={`relative inline-flex items-center justify-center gap-2 rounded-full px-5 py-3.5 text-[14px] font-semibold transition-all hover:scale-[1.02] mt-auto ${
-                      isFeatured
-                        ? 'bg-[#F27D26] hover:bg-[#FF8A2E] text-[#0C0C0C] shadow-[0_10px_30px_rgba(242,125,38,0.4)]'
-                        : 'bg-white text-[#0C0C0C] hover:bg-[#f0f0f0] shadow-[0_8px_20px_rgba(0,0,0,0.3)]'
-                    }`}
-                  >
-                    <span>{tier.cta}</span>
-                    <span aria-hidden>→</span>
-                  </a>
+                  {/* CTA */}
+                  <CheckoutButton tier={key} label={tier.cta} featured={featured} />
                 </div>
               );
             })}
           </div>
 
-          <p className="mt-8 text-center text-[12px] text-white/45 leading-relaxed max-w-[640px] mx-auto">
-            Paiement Stan.store · prix net TTC · accès immédiat par email. Pas de remboursement
-            une fois la bibliothèque téléchargée.
-          </p>
         </section>
 
         {/* FAQ */}
-        <section className="pb-24 md:pb-32 grid grid-cols-1 md:grid-cols-12 gap-10 max-w-[1200px] mx-auto">
+        <section className="pb-28 md:pb-36 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-14">
           <div className="md:col-span-4">
-            <p className="text-[11px] tracking-[0.22em] uppercase font-mono text-white/40 mb-3">
+            <p className="text-[11px] tracking-[0.32em] uppercase font-mono text-[#F27D26] mb-5">
               FAQ
             </p>
-            <h2 className="font-serif italic text-3xl md:text-4xl tracking-[-0.02em] leading-[1.05] text-white">
-              Les questions qui reviennent.
+            <h2 className="font-serif italic text-[34px] md:text-[42px] tracking-[-0.02em] leading-[1.05] text-white">
+              Les questions <span className="text-white/55">qui reviennent.</span>
             </h2>
+            <p className="mt-5 text-white/55 text-[14px] leading-relaxed max-w-[300px]">
+              Une autre question ? Envoie-moi un DM sur{' '}
+              <a
+                href="https://instagram.com/antoine_s31"
+                target="_blank"
+                rel="noreferrer"
+                className="text-white underline decoration-[#F27D26]/60 underline-offset-4 hover:decoration-[#F27D26] transition-colors"
+              >
+                @antoine_s31
+              </a>
+              .
+            </p>
           </div>
-          <div className="md:col-span-8 flex flex-col gap-7">
-            {FAQ.map((f) => (
-              <div key={f.q} className="border-b border-white/10 pb-6 last:border-0">
-                <h3 className="font-serif italic text-xl md:text-2xl tracking-[-0.01em] text-white mb-2">
-                  {f.q}
-                </h3>
-                <p className="text-white/65 text-[15px] leading-relaxed">{f.a}</p>
-              </div>
+          <div className="md:col-span-8 flex flex-col">
+            {FAQ.map((f, i) => (
+              <details
+                key={f.q}
+                className="group border-t border-white/10 last:border-b py-6 md:py-7"
+                {...(i === 0 ? { open: true } : {})}
+              >
+                <summary className="flex items-center justify-between gap-6 cursor-pointer list-none">
+                  <h3 className="font-serif italic text-[20px] md:text-[22px] tracking-[-0.01em] text-white">
+                    {f.q}
+                  </h3>
+                  <span
+                    aria-hidden
+                    className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white/5 text-white/65 group-hover:bg-[#F27D26]/15 group-hover:text-[#F27D26] transition-colors shrink-0"
+                  >
+                    <span className="block w-3 h-[1.5px] bg-current relative">
+                      <span className="absolute inset-0 m-auto w-[1.5px] h-3 bg-current group-open:hidden" />
+                    </span>
+                  </span>
+                </summary>
+                <p className="mt-4 text-white/65 text-[15px] leading-[1.65] max-w-[640px]">
+                  {f.a}
+                </p>
+              </details>
             ))}
           </div>
         </section>
       </div>
 
       <LabFooter />
-
-      <style>{`
-        .lab-glass {
-          background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(0,0,0,0.30));
-          backdrop-filter: blur(14px) brightness(0.92);
-          -webkit-backdrop-filter: blur(14px) brightness(0.92);
-          border: 1px solid rgba(255,255,255,0.12);
-          box-shadow: inset 0 1px 1px rgba(255,255,255,0.12);
-        }
-        .lab-glass:hover {
-          border-color: rgba(255,255,255,0.25);
-        }
-        .lab-glass-featured {
-          background: linear-gradient(135deg, rgba(15,15,15,0.6), rgba(15,15,15,0.35));
-          backdrop-filter: blur(18px) brightness(0.95);
-          -webkit-backdrop-filter: blur(18px) brightness(0.95);
-          border: 1px solid rgba(242,125,38,0.55);
-          box-shadow: 0 18px 60px rgba(242,125,38,0.18), inset 0 1px 1px rgba(255,255,255,0.15);
-        }
-        .lab-glass-featured:hover {
-          border-color: rgba(242,125,38,0.75);
-        }
-      `}</style>
     </main>
   );
 }

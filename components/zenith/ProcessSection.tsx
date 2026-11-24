@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import { ASSETS_BASE } from '@/lib/assets';
 
 const ITEMS = [
   {
@@ -29,7 +30,7 @@ const ITEMS = [
 ];
 
 const IMAGE =
-  'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260503_150112_2b0e700f-7af4-4459-b326-7d9e2f468daa.png&w=1280&q=85';
+  `${ASSETS_BASE}/zenith/asset-42b1d5ef.png`;
 
 export function ProcessSection() {
   const [activeKey, setActiveKey] = useState<string>('collection');

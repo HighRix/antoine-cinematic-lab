@@ -1,7 +1,8 @@
 'use client';
+import { ASSETS_BASE } from '@/lib/assets';
 
 const ABOUT_VIDEO =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_151551_992053d1-3d3e-4b8c-abac-45f22158f411.mp4';
+  `${ASSETS_BASE}/orbis/asset-21afc1c9.mp4`;
 
 const PARAGRAPH =
   'A digital object fixed beyond time and place. An exploration of distance, form, and silence in space';
