@@ -1,8 +1,9 @@
 'use client';
 import { SocialIconsVerticalLarge } from './SocialIcons';
+import { ASSETS_BASE } from '@/lib/assets';
 
 const CTA_VIDEO =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260331_055729_72d66327-b59e-4ae9-bb70-de6ccb5ecdb0.mp4';
+  `${ASSETS_BASE}/orbis/asset-31ea4312.mp4`;
 
 export function CtaSection() {
   return (

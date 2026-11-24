@@ -10,7 +10,7 @@ const VIEWPORT = { width: 1280, height: 800 };
 const SETTLE_MS = 1800;
 const RECORD_MS = 9000;
 
-const SLUGS = [
+const ALL_SLUGS = [
   'atlas',
   'aurum',
   'grenier-bio',
@@ -25,7 +25,32 @@ const SLUGS = [
   'tanli',
   'weblex',
   'new-era',
+  'vaultshield',
+  'toonhub',
+  'reposit',
+  'targo',
+  'guardnet',
+  'railroad',
+  'framelix',
+  'veloce',
+  'equilibrium',
+  'neovision',
+  'powerai',
+  'ember',
+  'tribe',
+  'vex',
+  'linkflow',
+  'spd',
+  'launchex',
+  'velorix',
+  'nexus',
+  'aethera',
+  'era',
 ];
+
+// Pass slugs as CLI args to capture only those (e.g. `node scripts/capture-previews.mjs vaultshield`)
+const CLI_SLUGS = process.argv.slice(2);
+const SLUGS = CLI_SLUGS.length ? CLI_SLUGS : ALL_SLUGS;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -197,6 +222,88 @@ const INTERACTIONS = {
     await smoothScrollTo(page, 800);
     await sleep(2000);
     await smoothScrollTo(page, 0);
+  },
+  neovision: async (page) => {
+    await sleep(1500);
+    await smoothScrollTo(page, 700);
+    await sleep(2000);
+    await smoothScrollTo(page, 1500);
+    await sleep(2200);
+    await smoothScrollTo(page, 0);
+    await sleep(1000);
+  },
+  veloce: async (page) => {
+    await sleep(1500);
+    await smoothScrollTo(page, 700);
+    await sleep(2000);
+    await smoothScrollTo(page, 1500);
+    await sleep(2000);
+    await smoothScrollTo(page, 0);
+    await sleep(1000);
+  },
+  launchex: async (page) => {
+    await sleep(1500);
+    await smoothScrollTo(page, 800);
+    await sleep(2000);
+    await smoothScrollTo(page, 1600);
+    await sleep(2000);
+    await smoothScrollTo(page, 0);
+    await sleep(1000);
+  },
+  spd: async (page) => {
+    await sleep(1500);
+    await smoothScrollTo(page, 900);
+    await sleep(2200);
+    await smoothScrollTo(page, 1600);
+    await sleep(2200);
+    await smoothScrollTo(page, 0);
+    await sleep(1000);
+  },
+  framelix: async (page) => {
+    await sleep(1800);
+    await smoothScrollTo(page, 600);
+    await sleep(1800);
+    await smoothScrollTo(page, 1100);
+    await sleep(1800);
+    await smoothScrollTo(page, 0);
+    await sleep(1000);
+  },
+  guardnet: async (page) => {
+    // Scroll through hero → security → companies → benefits
+    await sleep(1500);
+    await smoothScrollTo(page, 800);
+    await sleep(2000);
+    await smoothScrollTo(page, 1600);
+    await sleep(2000);
+    await smoothScrollTo(page, 2400);
+    await sleep(2000);
+    await smoothScrollTo(page, 0);
+    await sleep(1200);
+  },
+  reposit: async (page) => {
+    // Show the pull-down theme transition between Morning and Night
+    const morning = '.toggle-btn:nth-of-type(1)';
+    const night = '.toggle-btn:nth-of-type(2)';
+    await sleep(1800);
+    await page.click(morning);
+    await sleep(2200);
+    await page.click(night);
+    await sleep(2200);
+    await page.click(morning);
+    await sleep(1600);
+  },
+  toonhub: async (page) => {
+    // Cycle through the 4 figurines so the preview shows the carousel rotation
+    const nextBtn = 'button[aria-label="Next"]';
+    await sleep(1200);
+    await page.click(nextBtn);
+    await sleep(1700);
+    await page.click(nextBtn);
+    await sleep(1700);
+    await page.click(nextBtn);
+    await sleep(1700);
+    await page.click(nextBtn);
+    await sleep(1200);
   },
   _default: async (page) => {
     await page.mouse.move(W * 0.5, H * 0.5);

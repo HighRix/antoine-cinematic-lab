@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { ASSETS_BASE } from '@/lib/assets';
 
 const VIDEO_SRC =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_064122_c4750c0e-7476-4b44-94a2-a85a65c63bf2.mp4';
+  `${ASSETS_BASE}/lab/asset-547dccf0.mp4`;
 
 /**
  * Full-viewport fixed background video with boomerang playback :

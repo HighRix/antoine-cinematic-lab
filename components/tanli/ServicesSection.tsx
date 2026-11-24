@@ -1,4 +1,5 @@
 'use client';
+import { ASSETS_BASE } from '@/lib/assets';
 
 type Service = {
   num: string;
@@ -12,25 +13,25 @@ const SERVICES: Service[] = [
     num: '01',
     title: 'Installation\nélectrique neuve',
     desc: 'Câblage complet de constructions neuves, du tableau électrique aux luminaires, dans le respect strict de la NF C 15-100.',
-    icon: 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260322_015134_c80a3c98-609e-4526-b79e-94dc96cd34e8.png',
+    icon: `${ASSETS_BASE}/tanli/asset-a5c97d45.png`,
   },
   {
     num: '02',
     title: 'Domotique\n& smart home',
     desc: 'Pilotage centralisé éclairage, chauffage, volets, alarme. Compatible KNX, Loxone, Schneider Wiser.',
-    icon: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260322_014934_6e2804d7-d219-461d-98d5-36140fc90c4c.png&w=1280&q=85',
+    icon: `${ASSETS_BASE}/tanli/asset-822bb522.png`,
   },
   {
     num: '03',
     title: 'Rénovation\nélectrique',
     desc: 'Remise aux normes de l’existant, intégration discrète dans bâti ancien et chalets de montagne.',
-    icon: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260322_014626_97cccc38-534a-4c9d-a801-68a449da9d0c.png&w=1920&q=85',
+    icon: `${ASSETS_BASE}/tanli/asset-c77cf62b.png`,
   },
   {
     num: '04',
     title: 'Dépannage\n7j/7',
     desc: 'Intervention rapide sur panne, court-circuit, mise en sécurité. Astreinte sur le bassin Cluses-Bonneville.',
-    icon: 'https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260322_014849_570d4eeb-9613-4b19-a084-46c7a2665243.png&w=1280&q=85',
+    icon: `${ASSETS_BASE}/tanli/asset-81f5b3a1.png`,
   },
 ];
 

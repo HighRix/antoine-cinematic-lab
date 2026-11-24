@@ -1,7 +1,8 @@
 'use client';
+import { ASSETS_BASE } from '@/lib/assets';
 
 const ABOUT_VIDEO =
-  'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260322_011532_86f9b93a-2ffc-42fd-8735-12a4c55ab536.mp4';
+  `${ASSETS_BASE}/tanli/asset-9f4472b4.mp4`;
 
 export function AboutSection() {
   return (

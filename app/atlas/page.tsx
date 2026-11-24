@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
 import { WordsPullUp, WordsPullUpMultiStyle } from '@/components/atlas/WordsPullUp';
 import { ScrollRevealText } from '@/components/atlas/AnimatedLetter';
+import { ASSETS_BASE } from '@/lib/assets';
 
 const NOISE_OVERLAY_SVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E`;
 const BG_NOISE_SVG = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E`;
@@ -180,7 +181,7 @@ export default function AtlasPage() {
               <FeatureContent
                 num="01"
                 title="Storyboard Drift."
-                icon="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171918_4a5edc79-d78f-4637-ac8b-53c43c220606.png&w=1280&q=85"
+                icon={`${ASSETS_BASE}/atlas/asset-64fe809a.png`}
                 items={[
                   'Sketch a film in minutes, not sessions',
                   'Mood references that pull their weight',
@@ -195,7 +196,7 @@ export default function AtlasPage() {
               <FeatureContent
                 num="02"
                 title="Cut Companion."
-                icon="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171741_ed9845ab-f5b2-4018-8ce7-07cc01823522.png&w=1280&q=85"
+                icon={`${ASSETS_BASE}/atlas/asset-fc6c420d.png`}
                 items={[
                   'Frame-level notes from your team in real time',
                   'Color drift, pacing, transitions auto-flagged',
@@ -209,7 +210,7 @@ export default function AtlasPage() {
               <FeatureContent
                 num="03"
                 title="Deep Mode."
-                icon="https://images.higgs.ai/?default=1&output=webp&url=https%3A%2F%2Fd8j0ntlcm91z4.cloudfront.net%2Fuser_38xzZboKViGWJOttwIXH07lWA1P%2Fhf_20260405_171809_f56666dc-c099-4778-ad82-9ad4f209567b.png&w=1280&q=85"
+                icon={`${ASSETS_BASE}/atlas/asset-c651d794.png`}
                 items={[
                   'Mute the world for the hours you need',
                   'Soundscapes for focus or for rest',

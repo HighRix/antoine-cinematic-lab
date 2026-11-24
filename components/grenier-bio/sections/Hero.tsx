@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ArrowDown } from 'lucide-react';
+import { ASSETS_BASE } from '@/lib/assets';
 
 export function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -50,7 +51,7 @@ export function Hero() {
         aria-hidden="true"
       >
         <source
-          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_150921_27df94bd-d1e3-4440-9f55-314c4611902b.mp4"
+          src={`${ASSETS_BASE}/grenier-bio/asset-5805b724.mp4`}
           type="video/mp4"
         />
       </video>

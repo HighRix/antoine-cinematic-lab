@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 const QUOTE = {
   number: 'DEV-2026-013',
-  emittedOn: '8 mai 2026',
-  validUntil: '7 juin 2026',
+  emittedOn: '2 novembre 2026',
+  validUntil: '2 décembre 2026',
   deliveryDays: '2 semaines (10 jours ouvrés)',
 };
 
@@ -53,7 +53,7 @@ const LINES: Line[] = [
     num: '02',
     title: 'Direction artistique et maquettes UI',
     detail:
-      'Système de design (couleurs, typographies, composants). Maquettes Figma haute-fidélité des 5 pages, desktop et mobile. Une itération de retouches incluse.',
+      'Système de design. Maquettes Figma haute-fidélité des 5 pages, desktop et mobile. Une itération de retouches incluse.',
     qty: 1,
     unit: 350,
   },
@@ -61,20 +61,28 @@ const LINES: Line[] = [
     num: '03',
     title: 'Développement front-end (Next.js)',
     detail:
-      '5 pages : Accueil, Carte (pizzas et pâtes), Galerie et À propos, Saveur Italiano simplifié, Contact. Animations au scroll. 100 % responsive (mobile, tablette, desktop).',
+      '5 pages : Accueil (cafétéria, coin apéro), Carte complète (pizzas, plats, desserts, boissons, vins, prix sur place et à emporter), Traiteur avec section dédiée, Galerie et À propos (histoire, boutique Saveur Italiano), Contact avec plan. Animations au scroll, 100 % responsive.',
     qty: 1,
-    unit: 480,
+    unit: 560,
   },
   {
     num: '04',
     title: 'Intégration des contenus',
     detail:
-      'Mise en page des photos, textes et menus fournis par la cliente. Optimisation des images (WebP, lazy loading).',
+      'Mise en page des photos et des textes fournis par la cliente. Optimisation des images (WebP, lazy loading).',
     qty: 1,
     unit: 80,
   },
   {
     num: '05',
+    title: 'Nouvelle carte des pizzas',
+    detail:
+      'Saisie et mise en page de la carte complète (recettes, ingrédients, prix fournis par la cliente).',
+    qty: 1,
+    unit: 120,
+  },
+  {
+    num: '06',
     title: 'Référencement local (SEO technique)',
     detail:
       'Méta-titres et descriptions, Open Graph, Schema.org Restaurant et LocalBusiness en JSON-LD, sitemap.xml, robots.txt, soumission Google Search Console.',
@@ -82,7 +90,7 @@ const LINES: Line[] = [
     unit: 100,
   },
   {
-    num: '06',
+    num: '07',
     title: 'Déploiement et mise en ligne',
     detail:
       'Configuration DNS sur le domaine existant (pizzeria-etna-cluses.com). HTTPS automatique. Hébergement Vercel offert à vie. Tests multi-navigateurs.',
@@ -90,7 +98,7 @@ const LINES: Line[] = [
     unit: 60,
   },
   {
-    num: '07',
+    num: '08',
     title: 'Formation et garantie corrective',
     detail:
       'Prise en main du site sur place (environ 30 min). Garantie corrective de 30 jours après mise en ligne (bugs sans frais).',
@@ -99,14 +107,14 @@ const LINES: Line[] = [
   },
 ];
 
-const subtotal = LINES.reduce((s, l) => s + l.qty * l.unit, 0); // 1200
+const subtotal = LINES.reduce((s, l) => s + l.qty * l.unit, 0); // 1400
 const discountPct = 25;
-const discountAmount = (subtotal * discountPct) / 100; // 300
-const totalHT = subtotal - discountAmount; // 900
+const discountAmount = (subtotal * discountPct) / 100; // 350
+const totalHT = subtotal - discountAmount; // 1050
 
 const PAYMENT = [
-  { label: 'Acompte à la signature', pct: 40, amount: 360 },
-  { label: 'Livraison du site', pct: 60, amount: 540 },
+  { label: 'Acompte à la signature', pct: 40, amount: (totalHT * 40) / 100 }, // 420
+  { label: 'Livraison du site', pct: 60, amount: (totalHT * 60) / 100 }, // 630
 ];
 
 const fmt = (n: number) =>
@@ -143,7 +151,7 @@ export default function DevisEtnaPage() {
           min-height: 297mm;
           height: 297mm;
           margin: 32px auto;
-          padding: 13mm 14mm 13mm 14mm;
+          padding: 10mm 14mm 8mm 14mm;
           background: #0A0A0A;
           box-shadow: 0 30px 80px -20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.04);
           position: relative;
@@ -187,9 +195,9 @@ export default function DevisEtnaPage() {
         }
         .signature-box {
           height: 64px;
-          border: 1px dashed rgba(255,255,255,0.22);
+          border: 1px dashed #8A8A8A;
           border-radius: 6px;
-          background: rgba(255,255,255,0.02);
+          background: #FFFFFF;
         }
       `}</style>
 
@@ -204,7 +212,7 @@ export default function DevisEtnaPage() {
               justifyContent: 'space-between',
               alignItems: 'flex-start',
               gap: 24,
-              marginBottom: 14,
+              marginBottom: 10,
             }}
           >
             <div>
@@ -243,7 +251,7 @@ export default function DevisEtnaPage() {
               display: 'grid',
               gridTemplateColumns: '1fr 1fr',
               gap: 32,
-              padding: '12px 0',
+              padding: '8px 0',
             }}
           >
             <div>
@@ -327,7 +335,7 @@ export default function DevisEtnaPage() {
                   display: 'grid',
                   gridTemplateColumns: '28px 1fr 40px 72px 82px',
                   gap: 10,
-                  padding: '4px 0',
+                  padding: '3px 0',
                   alignItems: 'flex-start',
                 }}
               >
@@ -360,14 +368,14 @@ export default function DevisEtnaPage() {
               gridTemplateColumns: '1fr 300px',
               gap: 24,
               alignItems: 'flex-end',
-              marginBottom: 14,
+              marginBottom: 10,
             }}
           >
             <div>
               <span className="pill">Tarif exceptionnel apporteur d'affaires</span>
             </div>
 
-            <div className="total-band" style={{ padding: 14, borderRadius: 8 }}>
+            <div className="total-band" style={{ padding: 10, borderRadius: 8 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 11, marginBottom: 6 }}>
                 <span style={{ color: 'rgba(245,245,245,0.7)' }}>Sous-total HT</span>
                 <span className="num" style={{ color: '#F5F5F5' }}>{fmt(subtotal)}</span>
@@ -378,7 +386,7 @@ export default function DevisEtnaPage() {
                 </span>
                 <span className="num" style={{ color: '#E8721A' }}>−{fmt(discountAmount)}</span>
               </div>
-              <div style={{ height: 1, background: 'rgba(232,114,26,0.25)', margin: '10px 0' }} />
+              <div style={{ height: 1, background: 'rgba(232,114,26,0.25)', margin: '8px 0' }} />
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
                 <span className="serif" style={{ fontSize: 15, color: '#FFFFFF' }}>Total HT</span>
                 <span className="serif num" style={{ fontSize: 26, color: '#E8721A', lineHeight: 1 }}>
